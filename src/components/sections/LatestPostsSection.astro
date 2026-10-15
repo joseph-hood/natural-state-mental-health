@@ -1,0 +1,55 @@
+---
+/** "Latest from the blog" — the newest posts as cards. Pass in the posts to show. */
+import type { CollectionEntry } from 'astro:content';
+import Section from '../ui/Section.astro';
+import ArrowLink from '../ui/ArrowLink.astro';
+import PostCard from '../cards/PostCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<Section divider labelledby="latest-posts-heading">
+  <div class="stack">
+    <div class="head">
+      <h2 id="latest-posts-heading" class="h2 title">Latest from the blog</h2>
+      <ArrowLink href="/blog">All posts</ArrowLink>
+    </div>
+
+    <ul class="grid" role="list">
+      {
+        posts.map((post) => (
+          <li>
+            <PostCard {post} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .title {
+    font-size: clamp(32px, 3.2vw, 44px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 28px;
+  }
+</style>

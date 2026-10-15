@@ -1,0 +1,15 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# Cloudflare local state and secrets
+.wrangler/
+.dev.vars
+.env
+.env.*
+
+# OS / editor
+.DS_Store

@@ -1,0 +1,42 @@
+---
+/** "Get legislative alerts" — sand-coloured panel with the email/SMS sign-up. */
+import Section from '../ui/Section.astro';
+import AlertSignupForm from '../forms/AlertSignupForm.astro';
+---
+
+<Section padTop={false} labelledby="alerts-heading">
+  <div class="panel">
+    <div class="copy">
+      <h2 id="alerts-heading">Get legislative alerts.</h2>
+      <p>Know when the bill moves and when your call matters most. A few messages per session, never spam.</p>
+    </div>
+    <AlertSignupForm />
+  </div>
+</Section>
+
+<style>
+  .panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: 32px;
+    align-items: center;
+    padding: clamp(28px, 4vw, 56px);
+    background: var(--sand);
+    border-radius: 14px;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(28px, 2.8vw, 38px);
+    line-height: 1.15;
+    color: var(--green-deep);
+  }
+  p {
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+/**
+ * Field — one labelled form control (text input, select, or textarea).
+ * Every control gets a real <label>, so it works with screen readers and
+ * clicking the label focuses the field.
+ *
+ *   <Field id="join-email" name="email" label="Email" type="email" autocomplete="email" required />
+ *   <Field id="join-role" name="role" label="I am a…" as="select" options={['Doctor', 'Veteran']} />
+ *   <Field id="join-msg" name="message" label="Message" hint="Optional" as="textarea" />
+ *
+ * `hideLabel` keeps the label for screen readers but hides it visually
+ * (used where the design shows only placeholder text).
+ */
+interface Props {
+  /** Unique on the page. Links the label to the control. */
+  id: string;
+  name: string;
+  label: string;
+  as?: 'input' | 'textarea' | 'select';
+  type?: 'text' | 'email' | 'tel' | 'url' | 'number';
+  autocomplete?: string;
+  inputmode?: 'text' | 'numeric' | 'tel' | 'email';
+  required?: boolean;
+  /** Extra help shown under the label, e.g. "Optional — why this matters to you". */
+  hint?: string;
+  placeholder?: string;
+  options?: string[];
+  rows?: number;
+  hideLabel?: boolean;
+  /** "lg" = the larger fields used in the alerts sign-up. */
+  size?: 'md' | 'lg';
+}
+
+const {
+  id,
+  name,
+  label,
+  as = 'input',
+  type = 'text',
+  autocomplete,
+  inputmode,
+  required = false,
+  hint,
+  placeholder,
+  options = [],
+  rows = 3,
+  hideLabel = false,
+  size = 'md',
+} = Astro.props;
+
+const hintId = hint ? `${id}-hint` : undefined;
+---
+
+<div class:list={['field', size]}>
+  <label for={id} class:list={{ 'sr-only': hideLabel }}>
+    {label}{required && <span class="req" aria-hidden="true"> *</span>}
+  </label>
+  {hint && <p class="hint" id={hintId}>{hint}</p>}
+
+  {
+    as === 'textarea' ? (
+      <textarea {id} {name} {rows} {placeholder} {required} aria-describedby={hintId} />
+    ) : as === 'select' ? (
+      <select {id} {name} {required} autocomplete={autocomplete} aria-describedby={hintId}>
+        {options.map((option) => (
+          <option value={option}>{option}</option>
+        ))}
+      </select>
+    ) : (
+      <input
+        {id}
+        {name}
+        {type}
+        {placeholder}
+        {required}
+        autocomplete={autocomplete}
+        inputmode={inputmode}
+        aria-describedby={hintId}
+      />
+    )
+  }
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .hint {
+    margin-top: -4px;
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--field-border);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 400;
+  }
+  textarea {
+    resize: vertical;
+  }
+  .lg input {
+    padding: 14px 16px;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #6b786f;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 1px;
+    border-color: var(--green);
+  }
+</style>

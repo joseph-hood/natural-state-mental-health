@@ -1,0 +1,72 @@
+---
+/**
+ * Brand — the emblem plus the two-line "Natural State / MENTAL HEALTH" wordmark.
+ * `tone="dark"` swaps in the white logo for use on dark green backgrounds.
+ *
+ * The logo image is decorative (alt=""), because the words next to it already
+ * give screen readers the organization's name.
+ */
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo.png';
+import logoWhite from '../../assets/logo-white.png';
+
+interface Props {
+  tone?: 'light' | 'dark';
+  /** Logo size in pixels. */
+  size?: number;
+}
+
+const { tone = 'light', size = 60 } = Astro.props;
+---
+
+<span class:list={['brand', tone]}>
+  <Image
+    src={tone === 'dark' ? logoWhite : logo}
+    alt=""
+    width={size}
+    densities={[1, 2, 3]}
+    format="png"
+    class="brand-logo"
+    style={`width:${size}px;height:${size}px`}
+    loading="eager"
+  />
+  <span class="brand-text">
+    <span class="brand-name">Natural State</span>{' '}
+    <span class="brand-sub">Mental Health</span>
+  </span>
+</span>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--green);
+  }
+  .brand.dark {
+    color: #fff;
+  }
+  .brand-logo {
+    flex: none;
+    object-fit: contain;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .brand-name {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+  }
+  .brand-sub {
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+</style>

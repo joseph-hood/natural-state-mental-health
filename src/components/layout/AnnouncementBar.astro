@@ -1,0 +1,31 @@
+---
+/** The thin dark-green banner at the very top of every page. */
+import { SITE } from '../../config/site';
+---
+
+<!-- TODO: set SITE.practitionerSurveyUrl in src/config/site.ts to the real survey link. -->
+<aside class="announcement on-dark" aria-label="Announcement">
+  Are you an Arkansas resident trained in psychedelic therapy, facilitation, or integration?{' '}
+  <a href={SITE.practitionerSurveyUrl}>Take our practitioner survey&nbsp;<span aria-hidden="true">→</span></a>
+</aside>
+
+<style>
+  .announcement {
+    background: var(--green-deep);
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.45;
+    text-wrap: balance;
+  }
+  a {
+    color: var(--gold-light);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: #fff;
+  }
+</style>

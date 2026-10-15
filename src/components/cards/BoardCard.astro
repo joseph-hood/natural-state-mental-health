@@ -1,0 +1,100 @@
+---
+/**
+ * BoardCard — headshot, name, role and a one-line quote.
+ * The whole card is clickable (it links to the person's bio on the About page),
+ * but only the name is a real link, so screen readers hear a clean link label.
+ */
+import { Image } from 'astro:assets';
+import type { BoardMember } from '../../data/board';
+
+interface Props {
+  member: BoardMember;
+}
+
+const { member } = Astro.props;
+---
+
+<article class="board-card">
+  <Image
+    class="photo"
+    src={member.image}
+    alt={`Portrait of ${member.name}`}
+    width={193}
+    sizes="(min-width: 600px) 295px, 100vw"
+  />
+  <div class="body">
+    <h3 class="name"><a href={`/about#${member.slug}`}>{member.name}</a></h3>
+    <p class="role">{member.role}</p>
+    <p class="why">“{member.why}”</p>
+  </div>
+</article>
+
+<style>
+  .board-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .board-card:hover {
+    border-color: var(--green);
+  }
+  /* Show a focus ring around the whole card when its link is focused. */
+  .board-card:has(a:focus-visible) {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 193 / 134;
+    object-fit: cover;
+    object-position: 50% 30%;
+    background: #e4e9e2;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 20px 22px;
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .name a {
+    color: var(--green-deep);
+    text-decoration: none;
+  }
+  /* Stretches the link's click area over the whole card. */
+  .name a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .name a:focus-visible {
+    outline: none;
+  }
+  .role {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    color: var(--green);
+  }
+  .why {
+    margin-top: 4px;
+    font-size: 15px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--text-subtle);
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+/** The three big numbers under the hero, with their source. */
+import { stats, statsSource } from '../../data/states';
+import Section from '../ui/Section.astro';
+---
+
+<Section padTop={false} label="Key facts">
+  <dl class="stats">
+    {
+      stats.map((stat) => (
+        <div class="stat">
+          <dt class="figure">{stat.figure}</dt>
+          <dd class="text">{stat.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="source">
+    Source: <a href={statsSource.survey.href}>{statsSource.survey.label}</a> ({statsSource.sample}), via{' '}
+    <a href={statsSource.via.href}>{statsSource.via.label}</a>.
+  </p>
+</Section>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    border-top: 2px solid var(--green);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 28px 28px 8px 0;
+  }
+  .figure {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(48px, 4.6vw, 64px);
+    line-height: 1;
+    color: var(--green);
+  }
+  .text {
+    margin: 0;
+    max-width: 22em;
+    color: var(--text);
+  }
+  .source {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+  .source a {
+    color: var(--text-subtle);
+  }
+</style>
