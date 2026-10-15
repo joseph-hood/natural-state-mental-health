@@ -1,0 +1,137 @@
+---
+/** "The 2027 bill" — dark green band with the draft legislation's three headline points. */
+import { SITE } from '../../config/site';
+import { billPoints } from '../../data/bill';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+---
+
+<Section tone="green" labelledby="bill-heading">
+  <div class="grid">
+    <div class="copy">
+      <SectionHeading
+        id="bill-heading"
+        tone="dark"
+        eyebrow="The 2027 bill"
+        title="A careful, clinical path to access."
+      />
+      <p class="draft">Draft · provisions not final</p>
+      <p class="intro">
+        Our draft legislation, to be introduced in 2027, creates a regulated pathway for Arkansans to receive
+        psilocybin therapy under qualified medical supervision.
+      </p>
+      <div class="actions">
+        <Button href={`mailto:${SITE.email}?subject=Draft%20legislation%20request`}>
+          Request the draft legislation
+        </Button>
+        <a class="summary" href="/legislation">Read the summary</a>
+      </div>
+    </div>
+
+    <ol class="points" role="list">
+      {
+        billPoints.map((point, index) => (
+          <li class="point">
+            <span class="num" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="point-title">{point.title}</h3>
+              <p class="point-text">
+                {point.text}
+                {point.note && (
+                  <>
+                    {' '}
+                    <span class="note">{point.note}</span>
+                  </>
+                )}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: clamp(36px, 5vw, 72px);
+    align-items: start;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .draft {
+    align-self: flex-start;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--green-deep);
+  }
+  .intro {
+    font-size: 18px;
+    color: var(--mint);
+    text-wrap: pretty;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .summary {
+    padding: 15px 6px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .summary:hover {
+    color: var(--gold-light);
+  }
+
+  .points {
+    display: flex;
+    flex-direction: column;
+  }
+  .point {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .point:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .num {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--gold-light);
+  }
+  .point-title {
+    margin-bottom: 6px;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.25;
+  }
+  .point-text {
+    color: var(--mint);
+  }
+  .note {
+    color: var(--gold-light);
+  }
+</style>

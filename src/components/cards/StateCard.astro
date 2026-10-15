@@ -1,0 +1,48 @@
+---
+/** StateCard — one "what this state did" tile. Put each inside an <li>. */
+import type { StateAction } from '../../data/states';
+
+interface Props {
+  state: StateAction;
+}
+
+const { state } = Astro.props;
+---
+
+<article class="state-card">
+  <h3 class="name">{state.name}</h3>
+  <p class="big">{state.big}</p>
+  <p class="note">{state.note}</p>
+</article>
+
+<style>
+  .state-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .big {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.1;
+    color: var(--green-deep);
+  }
+  .note {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+</style>

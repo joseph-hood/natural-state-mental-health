@@ -1,0 +1,131 @@
+---
+/** Footer — shown on every page. Links come from src/data/nav.ts. */
+import { SITE } from '../../config/site';
+import { footerNav, donateLink } from '../../data/nav';
+import Brand from './Brand.astro';
+import Button from '../ui/Button.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark">
+  <div class="container inner">
+    <div class="columns">
+      <div class="col about">
+        <Brand tone="dark" size={96} />
+        <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </div>
+
+      {
+        footerNav.map((group) => (
+          <nav class="col" aria-labelledby={`footer-${group.heading.toLowerCase().replace(/\s+/g, '-')}`}>
+            <h2 class="col-title" id={`footer-${group.heading.toLowerCase().replace(/\s+/g, '-')}`}>
+              {group.heading}
+            </h2>
+            <ul role="list">
+              {group.links.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      <div class="col cta">
+        <p class="cta-text">Help us bring this to the 2027 session.</p>
+        <Button href={donateLink.href}>{donateLink.label}</Button>
+      </div>
+    </div>
+
+    <div class="legal">
+      <p>
+        Natural State Mental Health is a 501(c)(4) Social Welfare Organization. Contributions are not
+        deductible as charitable contributions for federal income tax purposes.
+      </p>
+      <p>© {year} Natural State Mental Health</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--green-deep);
+    color: var(--mint);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: 32px;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* Four columns on desktop: about | Organization | Take action | donate */
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 36px;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .about {
+    gap: 16px;
+  }
+
+  .email {
+    color: #fff;
+  }
+
+  .col-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .col li a {
+    color: var(--mint);
+    text-decoration: none;
+  }
+  .col li a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cta {
+    gap: 14px;
+  }
+  .cta-text {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .legal p:first-child {
+    max-width: 760px;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+/** Shown for any address that doesn't exist. Cloudflare serves this via wrangler.jsonc. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Page not found" announcement={false}>
+  <Section labelledby="not-found-heading">
+    <div class="wrap">
+      <SectionHeading
+        level={1}
+        id="not-found-heading"
+        eyebrow="Error 404"
+        title="We couldn’t find that page."
+        maxWidth="640px"
+      >
+        <p>The link may be out of date, or the page may have moved. Let’s get you back on track.</p>
+      </SectionHeading>
+      <div class="actions">
+        <Button href="/">Go to the home page</Button>
+        <Button href="/blog" variant="outline">Read the blog</Button>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-height: 40vh;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

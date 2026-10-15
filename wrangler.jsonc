@@ -1,0 +1,22 @@
+// Cloudflare Workers configuration.
+// This site is built into plain files (the "dist" folder) and Cloudflare serves
+// them as "static assets", so there is no server code to write or maintain.
+// Docs: https://developers.cloudflare.com/workers/static-assets/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // The name of the Worker. For the preview it becomes part of the address:
+  //   https://naturalstatemh-site.<your-account>.workers.dev
+  "name": "naturalstatemh-site",
+
+  // Pins Cloudflare's runtime behavior to this date so future changes
+  // don't surprise us. Safe to leave alone.
+  "compatibility_date": "2026-10-15",
+
+  "assets": {
+    // The folder that `npm run build` creates.
+    "directory": "./dist",
+    // Show our own 404 page (src/pages/404.astro) for unknown addresses.
+    "not_found_handling": "404-page"
+  }
+}

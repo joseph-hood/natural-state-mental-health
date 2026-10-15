@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/lucide-static@0.460.0/font/lucide.css">
+<style>body{margin:0}a{color:#214935}a:hover{color:#17311F}</style>
+</helmet>
+<div ref="{{ rootRef }}" style="container-type:inline-size;background:{{ bgColor }};color:#1A2620;font-family:'Source Sans 3',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased">
+
+<sc-if value="{{ showRest }}" hint-placeholder-val="{{ true }}">
+<!-- Announcement -->
+<div style="background:#17311F;color:#fff;padding:10px 20px;text-align:center;font-size:15px;line-height:1.45;text-wrap:balance">Are you an Arkansas resident trained in psychedelic therapy, facilitation, or integration? <a href="#" style="color:#F2C66B;font-weight:600;text-decoration:underline;text-underline-offset:3px">Take our practitioner survey →</a></div>
+
+<!-- Header -->
+<header style="position:sticky;top:0;z-index:10;background:{{ bgColor }};border-bottom:1px solid rgba(33,73,53,.12)">
+<div style="max-width:1240px;margin:0 auto;padding:14px clamp(20px,4cqi,48px);display:flex;align-items:center;justify-content:space-between;gap:20px">
+<a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#214935">
+<img src="assets/logo.png" alt="Natural State Mental Health emblem" style="width:60px;height:60px;object-fit:contain;flex:none">
+<div style="display:flex;flex-direction:column;line-height:1.1;white-space:nowrap"><span style="font:700 18px/1.1 'Source Serif 4',serif;letter-spacing:.01em">Natural State</span><span style="font:600 12px/1.3 'Source Sans 3',sans-serif;letter-spacing:.16em;text-transform:uppercase">Mental Health</span></div>
+</a>
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;align-items:center;gap:32px;font-weight:600;font-size:16px">
+<a href="#" style="text-decoration:none;color:#1A2620">About</a>
+<a href="#" style="text-decoration:none;color:#1A2620">The Legislation</a>
+<a href="#" style="text-decoration:none;color:#1A2620">Join the Coalition</a>
+<a href="#" style="text-decoration:none;color:#1A2620">Blog</a>
+<a href="#" style="background:#E0A93B;color:#17311F;text-decoration:none;padding:11px 22px;border-radius:6px;font-weight:700" style-hover="background:#EBB955">Donate</a>
+</nav>
+</sc-if>
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:8px">
+<a href="#" style="background:#E0A93B;color:#17311F;text-decoration:none;padding:10px 18px;border-radius:6px;font-weight:700;font-size:16px">Donate</a>
+<button aria-label="Menu" style="width:44px;height:44px;border:1px solid rgba(33,73,53,.25);background:transparent;border-radius:6px;color:#214935;font-size:22px;display:flex;align-items:center;justify-content:center"><i class="icon-menu"></i></button>
+</div>
+</sc-if>
+</div>
+</header>
+
+<!-- Hero -->
+<section style="padding:clamp(40px,6cqi,96px) clamp(20px,4cqi,48px) clamp(48px,6cqi,96px)">
+<div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5cqi,72px);align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#214935"><span style="width:8px;height:8px;background:#E0A93B;transform:rotate(45deg)"></span>Arkansas · 2027 Legislative Session</div>
+<h1 style="margin:0;font:600 clamp(40px,5.2cqi,72px)/1.05 'Source Serif 4',serif;letter-spacing:-.015em;color:#17311F;text-wrap:balance">Advancing Psychedelic Legislation in Arkansas.</h1>
+<p style="margin:0;font-size:clamp(18px,1.5cqi,21px);line-height:1.55;color:#3F4F45;max-width:34em;text-wrap:pretty">We're a group of concerned Arkansans working to pass legislation in 2027 that gives Arkansans access to therapeutic psilocybin.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+<a href="#" style="background:#E0A93B;color:#17311F;text-decoration:none;padding:15px 28px;border-radius:6px;font-weight:700;font-size:17px" style-hover="background:#EBB955">Donate</a>
+<a href="#" style="border:1.5px solid #214935;color:#214935;text-decoration:none;padding:13.5px 26px;border-radius:6px;font-weight:700;font-size:17px" style-hover="background:rgba(33,73,53,.06)">Join the Coalition</a>
+</div>
+</div>
+<div style="position:relative">
+<img src="assets/arkansas-river-bridge.jpg" alt="Bridge over the Arkansas River in Little Rock" style="display:block;width:100%;aspect-ratio:5/4;object-fit:cover;object-position:35% 50%;border-radius:10px">
+<div style="position:absolute;left:clamp(-24px,-1.6cqi,0px);bottom:-20px;background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(20,54,33,.14);padding:14px 18px;display:flex;gap:12px;align-items:center;max-width:290px">
+<div style="width:36px;height:36px;border-radius:50%;background:#214935;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:18px"><i class="icon-landmark"></i></div>
+<div style="font-size:14px;line-height:1.35;color:#1A2620"><strong>Physician-led.</strong> Research-backed. Built for Arkansas.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Stats -->
+<section style="padding:0 clamp(20px,4cqi,48px) clamp(56px,7cqi,104px)">
+<div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));border-top:2px solid #214935">
+<div style="padding:28px 28px 8px 0;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 clamp(48px,4.6cqi,64px)/1 'Source Serif 4',serif;color:#214935">72%</div>
+<p style="margin:0;color:#3F4F45;max-width:22em">of U.S. voters back legal therapeutic access to psychedelics.</p>
+</div>
+<div style="padding:28px 28px 8px 0;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 clamp(48px,4.6cqi,64px)/1 'Source Serif 4',serif;color:#214935">55%</div>
+<p style="margin:0;color:#3F4F45;max-width:22em">say they or someone close to them has used psychedelics.</p>
+</div>
+<div style="padding:28px 28px 8px 0;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 clamp(48px,4.6cqi,64px)/1 'Source Serif 4',serif;color:#214935">Never</div>
+<p style="margin:0;color:#3F4F45;max-width:22em">Arkansas is one of only a few states that has never attempted psychedelic legislation.</p>
+</div>
+</div>
+<div style="max-width:1240px;margin:16px auto 0;font-size:13px;color:#5B6B60">Source: <a href="https://psychedelics.berkeley.edu/uc-berkeley-bcsp-second-psychedelic-survey-results/" style="color:#5B6B60">UC Berkeley Psychedelics Survey, 2025</a> (n=1,577 U.S. voters), via <a href="https://psychedelicalpha.com/resources/the-psychedelics-perceptions-tracker/" style="color:#5B6B60">Psychedelic Alpha</a>.</div>
+</section>
+
+</sc-if>
+<!-- It's About Time -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px);background:rgba(33,73,53,.045)">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:720px">
+<div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#214935">Our neighbors are moving</div>
+<h2 style="margin:0;font:600 clamp(34px,3.6cqi,52px)/1.1 'Source Serif 4',serif;color:#17311F;letter-spacing:-.01em">It's About Time.</h2>
+<p style="margin:0;font-size:19px;color:#3F4F45;text-wrap:pretty">States like ours are already acting on psychedelic therapy, often with broad bipartisan support.</p>
+</div>
+
+<sc-if value="{{ vCards }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px">
+<sc-for list="{{ states }}" as="s" hint-placeholder-count="5">
+<div style="background:#fff;border:1px solid rgba(33,73,53,.14);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:10px">
+<div style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#214935">{{ s.name }}</div>
+<div style="font:600 30px/1.1 'Source Serif 4',serif;color:#17311F">{{ s.big }}</div>
+<div style="font-size:15px;line-height:1.45;color:#3F4F45">{{ s.note }}</div>
+</div>
+</sc-for>
+<div style="background:#FBF1DC;border:1.5px dashed #C48A1C;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:10px">
+<div style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#17311F">Arkansas</div>
+<div style="font:600 30px/1.1 'Source Serif 4',serif;color:#17311F">2027</div>
+<div style="font-size:15px;line-height:1.45;color:#3F4F45">Never attempted. Let's change that.</div>
+<a href="#" style="font-weight:700;font-size:15px;color:#17311F;margin-top:auto">Join the coalition →</a>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ vMap }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4cqi,56px);align-items:center">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:4px">
+<sc-for list="{{ tiles }}" as="t" hint-placeholder-count="51">
+<div style="grid-column:{{ t.gc }};grid-row:{{ t.gr }};aspect-ratio:1/1;border-radius:4px;background:{{ t.bg }};color:{{ t.fg }};outline:{{ t.ol }};outline-offset:2px;display:flex;align-items:center;justify-content:center;font:600 clamp(9px,.85cqi,12px) 'Source Sans 3',sans-serif;letter-spacing:.04em;transition:background .15s">{{ t.id }}</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:#3F4F45">
+<span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:3px;background:#214935"></span>Bill passed or program created</span>
+<span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:3px;background:#F2C66B"></span>Arkansas: never attempted</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid rgba(33,73,53,.2)">
+<sc-for list="{{ states }}" as="s" hint-placeholder-count="5">
+<div onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}" style="display:grid;grid-template-columns:minmax(110px,.8fr) minmax(0,1.6fr);gap:4px 20px;padding:16px 12px;border-bottom:1px solid rgba(33,73,53,.2);cursor:default;background:{{ s.rowBg }};transition:background .15s">
+<div style="font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#214935;padding-top:6px">{{ s.name }}</div>
+<div><div style="font:600 24px/1.2 'Source Serif 4',serif;color:#17311F">{{ s.big }}</div><div style="font-size:15px;color:#3F4F45">{{ s.note }}</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ vLedger }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;border-top:2px solid #214935">
+<sc-for list="{{ states }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 32px;padding:22px 0;border-bottom:1px solid rgba(33,73,53,.2)">
+<div style="flex:0 0 170px;font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#214935">{{ s.name }}</div>
+<div style="flex:0 0 min(100%,300px);font:600 clamp(30px,3cqi,42px)/1.05 'Source Serif 4',serif;color:#17311F">{{ s.big }}</div>
+<div style="flex:1 1 260px;font-size:17px;color:#3F4F45">{{ s.note }}</div>
+</div>
+</sc-for>
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 32px;padding:22px 20px;margin-top:12px;background:#FBF1DC;border-radius:8px">
+<div style="flex:0 0 150px;font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#17311F">Arkansas</div>
+<div style="flex:0 0 min(100%,300px);font:600 clamp(30px,3cqi,42px)/1.05 'Source Serif 4',serif;color:#17311F">Not yet.</div>
+<div style="flex:1 1 260px;font-size:17px;color:#3F4F45">No psychedelic therapy bill has ever been filed. <a href="#" style="font-weight:700;color:#17311F">Help us change that in 2027 →</a></div>
+</div>
+</div>
+</sc-if>
+
+<p style="margin:0;font:italic 400 clamp(21px,2cqi,26px)/1.4 'Source Serif 4',serif;color:#17311F;max-width:820px;border-left:3px solid #E0A93B;padding-left:20px;text-wrap:pretty">Other conservative, rural, veteran-heavy states are not sitting this out, and neither should we.</p>
+</div>
+</section>
+
+<sc-if value="{{ showRest }}" hint-placeholder-val="{{ true }}">
+<!-- Research -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px)">
+<div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5cqi,72px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#214935">The evidence</div>
+<h2 style="margin:0;font:600 clamp(34px,3.6cqi,52px)/1.1 'Source Serif 4',serif;color:#17311F;letter-spacing:-.01em">What the research shows.</h2>
+<p style="margin:0;font-size:18px;color:#3F4F45;text-wrap:pretty">Clinical trials at leading research institutions are studying psilocybin-assisted therapy for conditions that affect thousands of Arkansas families.</p>
+<a href="#" style="font-weight:700;color:#214935;text-underline-offset:3px">Read the research summary →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));border-top:1px solid rgba(33,73,53,.2);border-left:1px solid rgba(33,73,53,.2)">
+<sc-for list="{{ conditions }}" as="c" hint-placeholder-count="8">
+<div style="padding:22px 20px;border-right:1px solid rgba(33,73,53,.2);border-bottom:1px solid rgba(33,73,53,.2);display:flex;flex-direction:column;gap:6px;min-height:92px" style-hover="background:rgba(33,73,53,.04)">
+<div style="font:400 12px 'JetBrains Mono',monospace;color:#5B6B60">{{ c.n }}</div>
+<div style="font:600 21px/1.2 'Source Serif 4',serif;color:#17311F">{{ c.name }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- Board -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px);background:rgba(33,73,53,.045)">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:680px">
+<div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#214935">Our board</div>
+<h2 style="margin:0;font:600 clamp(34px,3.6cqi,52px)/1.1 'Source Serif 4',serif;color:#17311F;letter-spacing:-.01em">The people behind this.</h2>
+<p style="margin:0;font-size:18px;color:#3F4F45">Physicians, clinicians, scientists, and public servants from across Arkansas.</p>
+</div>
+<a href="#" style="font-weight:700;color:#214935;text-underline-offset:3px">Meet the full board →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:20px">
+<sc-for list="{{ board }}" as="b" hint-placeholder-count="8">
+<a href="#" style="background:#fff;border:1px solid rgba(33,73,53,.14);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column" style-hover="border-color:#214935">
+<img src="{{ b.img }}" alt="{{ b.name }}" style="display:block;width:100%;aspect-ratio:193/134;object-fit:cover;object-position:50% 30%;background:#E4E9E2">
+<div style="padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 21px/1.2 'Source Serif 4',serif;color:#17311F">{{ b.name }}</div>
+<div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#214935;line-height:1.35">{{ b.role }}</div>
+<div style="font-size:15px;line-height:1.5;color:#5B6B60;font-style:italic;margin-top:4px">“{{ b.why }}”</div>
+</div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- 2027 Bill -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px);background:#214935;color:#fff">
+<div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(36px,5cqi,72px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F2C66B">The 2027 bill</div>
+<h2 style="margin:0;font:600 clamp(34px,3.6cqi,52px)/1.1 'Source Serif 4',serif;letter-spacing:-.01em;text-wrap:balance">A careful, clinical path to access.</h2>
+<div style="align-self:flex-start;font:400 12px 'JetBrains Mono',monospace;color:#17311F;background:#F2C66B;padding:4px 8px;border-radius:4px">Draft · provisions not final</div>
+<p style="margin:0;font-size:18px;color:#DCE6DE;text-wrap:pretty">Our draft legislation, to be introduced in 2027, creates a regulated pathway for Arkansans to receive psilocybin therapy under qualified medical supervision.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+<a href="mailto:admin@NaturalStateMH.org?subject=Draft%20legislation%20request" style="background:#E0A93B;color:#17311F;text-decoration:none;padding:15px 26px;border-radius:6px;font-weight:700" style-hover="background:#EBB955">Request the draft legislation</a>
+<a href="#" style="color:#fff;text-decoration:underline;text-underline-offset:4px;padding:15px 6px;font-weight:600">Read the summary</a>
+</div>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:44px 1fr;gap:18px;padding:24px 0;border-top:1px solid rgba(255,255,255,.2)">
+<div style="font:600 28px/1 'Source Serif 4',serif;color:#F2C66B">01</div>
+<div><div style="font:600 23px/1.25 'Source Serif 4',serif;margin-bottom:6px">Responsible access</div><div style="color:#DCE6DE">Adults with qualifying conditions can access psilocybin therapy through licensed, regulated providers.</div></div>
+</div>
+<div style="display:grid;grid-template-columns:44px 1fr;gap:18px;padding:24px 0;border-top:1px solid rgba(255,255,255,.2)">
+<div style="font:600 28px/1 'Source Serif 4',serif;color:#F2C66B">02</div>
+<div><div style="font:600 23px/1.25 'Source Serif 4',serif;margin-bottom:6px">Clinical oversight</div><div style="color:#DCE6DE">Treatment is screened, supervised, and documented by licensed healthcare professionals held to clear professional standards.</div></div>
+</div>
+<div style="display:grid;grid-template-columns:44px 1fr;gap:18px;padding:24px 0;border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)">
+<div style="font:600 28px/1 'Source Serif 4',serif;color:#F2C66B">03</div>
+<div><div style="font:600 23px/1.25 'Source Serif 4',serif;margin-bottom:6px">Patient protections</div><div style="color:#DCE6DE">Safety standards, informed consent, and privacy safeguards protect every patient. <span style="color:#F2C66B">[Specific provisions TBD]</span></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Coalition -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px)">
+<div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(36px,5cqi,72px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#214935">Join the coalition</div>
+<h2 style="margin:0;font:600 clamp(34px,3.6cqi,52px)/1.1 'Source Serif 4',serif;color:#17311F;letter-spacing:-.01em;text-wrap:balance">Add your name. Add your voice.</h2>
+<p style="margin:0;font-size:18px;color:#3F4F45;text-wrap:pretty">We're looking for concerned individuals and groups to review our initiatives, call their representatives, and sign on as official coalition members.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px">
+<sc-for list="{{ roles }}" as="r" hint-placeholder-count="8">
+<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid rgba(33,73,53,.16);border-radius:8px;font-weight:600;font-size:15px;color:#17311F;line-height:1.25"><i class="{{ r.icon }}" style="font-size:20px;color:#214935;flex:none"></i>{{ r.label }}</div>
+</sc-for>
+</div>
+</div>
+<form style="background:#fff;border:1px solid rgba(33,73,53,.16);border-radius:12px;padding:clamp(22px,3cqi,36px);display:flex;flex-direction:column;gap:16px;box-shadow:0 12px 40px rgba(20,54,33,.07)">
+<div style="font:600 24px/1.2 'Source Serif 4',serif;color:#17311F">Sign on as a member</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">First name<input style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Last name<input style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Email<input type="email" style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Phone<input type="tel" style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">ZIP or county<input style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">I am a…<select style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"><option>Concerned citizen</option><option>Doctor</option><option>Therapist</option><option>Veteran</option><option>First responder</option><option>Patient advocate</option><option>Researcher</option><option>Healthcare worker</option></select></label>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Organization <span style="font-weight:400;color:#5B6B60;margin-top:-6px">Optional — if signing on as a group</span><input style="font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Message <span style="font-weight:400;color:#5B6B60;margin-top:-6px">Optional — why this matters to you</span><textarea rows="3" style="resize:vertical;font:inherit;font-weight:400;font-size:16px;padding:12px 14px;border:1px solid #B9C4BC;border-radius:6px;background:#fff"></textarea></label>
+<label style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#3F4F45"><input type="checkbox" style="width:18px;height:18px;margin-top:3px;accent-color:#214935"> I'm willing to call or write my state legislators.</label>
+<button type="button" style="font:inherit;font-weight:700;font-size:17px;background:#214935;color:#fff;border:0;border-radius:6px;padding:15px;cursor:pointer" style-hover="background:#17311F">Join the Coalition</button>
+</form>
+</div>
+</section>
+
+<!-- Blog -->
+<section style="padding:clamp(56px,7cqi,104px) clamp(20px,4cqi,48px);border-top:1px solid rgba(33,73,53,.12)">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px">
+<h2 style="margin:0;font:600 clamp(32px,3.2cqi,44px)/1.1 'Source Serif 4',serif;color:#17311F;letter-spacing:-.01em">Latest from the blog</h2>
+<a href="#" style="font-weight:700;color:#214935;text-underline-offset:3px">All posts →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px">
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="3">
+<a href="#" style="display:flex;flex-direction:column;gap:14px;text-decoration:none;color:inherit">
+<div style="aspect-ratio:16/10;border-radius:8px;background:repeating-linear-gradient(135deg,#E4E9E2 0 10px,#EEF1EB 10px 20px);display:flex;align-items:center;justify-content:center;font:400 12px 'JetBrains Mono',monospace;color:#5B6B60">{{ p.img }}</div>
+<div style="display:flex;gap:10px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#214935">{{ p.cat }}<span style="color:#5B6B60;font-weight:500">{{ p.date }}</span></div>
+<div style="font:600 23px/1.25 'Source Serif 4',serif;color:#17311F;text-wrap:pretty">{{ p.title }}</div>
+<div style="font-size:16px;color:#3F4F45">{{ p.excerpt }}</div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- Alerts -->
+<section style="padding:0 clamp(20px,4cqi,48px) clamp(56px,7cqi,104px)">
+<div style="max-width:1240px;margin:0 auto;background:#F2EAD6;border-radius:14px;padding:clamp(28px,4cqi,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font:600 clamp(28px,2.8cqi,38px)/1.15 'Source Serif 4',serif;color:#17311F">Get legislative alerts.</h2>
+<p style="margin:0;color:#3F4F45">Know when the bill moves and when your call matters most. A few messages per session, never spam.</p>
+</div>
+<form style="display:flex;flex-direction:column;gap:12px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+<input placeholder="Email address" style="font:inherit;font-size:16px;padding:14px 16px;border:1px solid #B9AE90;border-radius:6px;background:#fff">
+<input placeholder="Mobile (optional)" style="font:inherit;font-size:16px;padding:14px 16px;border:1px solid #B9AE90;border-radius:6px;background:#fff">
+</div>
+<button type="button" style="font:inherit;font-weight:700;font-size:17px;background:#214935;color:#fff;border:0;border-radius:6px;padding:14px;cursor:pointer">Sign up for alerts</button>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#4A5248">By providing your mobile number, you agree to receive recurring text messages from Natural State Mental Health. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="#">Privacy Policy</a>.</p>
+</form>
+</div>
+</section>
+
+<!-- Footer -->
+<footer style="background:#17311F;color:#DCE6DE;padding:clamp(48px,6cqi,80px) clamp(20px,4cqi,48px) 32px">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:12px;color:#fff"><img src="assets/logo-white.png" alt="" style="width:96px;height:96px;object-fit:contain;flex:none"><div style="display:flex;flex-direction:column;line-height:1.1"><span style="font:700 18px 'Source Serif 4',serif">Natural State</span><span style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase">Mental Health</span></div></div>
+<a href="mailto:admin@NaturalStateMH.org" style="color:#fff">admin@NaturalStateMH.org</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F2C66B">Organization</div><a href="#" style="color:#DCE6DE;text-decoration:none">About</a><a href="#" style="color:#DCE6DE;text-decoration:none">Statement of Purpose</a><a href="#" style="color:#DCE6DE;text-decoration:none">Blog</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F2C66B">Take action</div><a href="#" style="color:#DCE6DE;text-decoration:none">The Legislation</a><a href="#" style="color:#DCE6DE;text-decoration:none">Join the Coalition</a><a href="#" style="color:#DCE6DE;text-decoration:none">Practitioner Survey</a></div>
+<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start"><div style="font:600 22px/1.25 'Source Serif 4',serif;color:#fff">Help us bring this to the 2027 session.</div><a href="#" style="background:#E0A93B;color:#17311F;text-decoration:none;padding:13px 26px;border-radius:6px;font-weight:700">Donate</a></div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.18);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:14px;line-height:1.55">
+<p style="margin:0;max-width:760px">Natural State Mental Health is a 501(c)(4) Social Welfare Organization. Contributions are not deductible as charitable contributions for federal income tax purposes.</p>
+<span>© 2026 Natural State Mental Health</span>
+</div>
+</div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;bg&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;white&quot;,&quot;cream&quot;],&quot;default&quot;:&quot;white&quot;,&quot;tsType&quot;:&quot;'white'|'cream'&quot;},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;aboutTime&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cards&quot;,&quot;map&quot;,&quot;ledger&quot;],&quot;default&quot;:&quot;cards&quot;,&quot;tsType&quot;:&quot;'cards'|'map'|'ledger'&quot;},&quot;only&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;abouttime&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const STATES = [
+  { id: 'MO', name: 'Missouri', big: '137–11', note: 'Psilocybin therapy bill passed the House.' },
+  { id: 'IA', name: 'Iowa', big: '84–6', note: 'Psilocybin therapy bill passed the House.' },
+  { id: 'LA', name: 'Louisiana', big: 'Unanimous', note: 'Enacted unanimously, carried by a Republican sponsor.' },
+  { id: 'TX', name: 'Texas', big: 'Tens of millions', note: 'Committed to psychedelic therapy research.' },
+  { id: 'NM', name: 'New Mexico', big: 'First', note: 'Legislature-created medical psilocybin program.' }
+];
+const TILES = [['AK',0,0],['ME',0,10],['VT',1,9],['NH',1,10],
+['WA',2,0],['ID',2,1],['MT',2,2],['ND',2,3],['MN',2,4],['IL',2,5],['WI',2,6],['MI',2,7],['NY',2,8],['RI',2,9],['MA',2,10],
+['OR',3,0],['NV',3,1],['WY',3,2],['SD',3,3],['IA',3,4],['IN',3,5],['OH',3,6],['PA',3,7],['NJ',3,8],['CT',3,9],
+['CA',4,0],['UT',4,1],['CO',4,2],['NE',4,3],['MO',4,4],['KY',4,5],['WV',4,6],['VA',4,7],['MD',4,8],['DE',4,9],
+['AZ',5,1],['NM',5,2],['KS',5,3],['AR',5,4],['TN',5,5],['NC',5,6],['SC',5,7],['DC',5,8],
+['OK',6,3],['LA',6,4],['MS',6,5],['AL',6,6],['GA',6,7],['HI',7,0],['TX',7,3],['FL',7,8]];
+class Component extends DCLogic {
+  state = { w: 1440, hover: null };
+  rootRef = (el) => {
+    if (this.ro) { this.ro.disconnect(); this.ro = null; }
+    if (!el) return;
+    const set = (w) => { if (w && Math.abs(w - this.state.w) > 1) this.setState({ w }); };
+    set(el.getBoundingClientRect().width);
+    this.ro = new ResizeObserver(([e]) => set(e.contentRect.width));
+    this.ro.observe(el);
+  };
+  componentWillUnmount() { this.ro && this.ro.disconnect(); }
+  renderVals() {
+    const v = this.props.aboutTime ?? 'cards', hov = this.state.hover;
+    const wide = this.props.mobile === true || this.props.mobile === 'true' ? false : this.state.w >= 900;
+    return {
+      rootRef: this.rootRef,
+      wide, narrow: !wide,
+      bgColor: (this.props.bg ?? 'cream') === 'cream' ? '#FAF6EC' : '#FFFFFF',
+      vCards: v === 'cards', vMap: v === 'map', vLedger: v === 'ledger',
+      showRest: this.props.only !== 'abouttime',
+      states: STATES.map(s => ({ ...s, rowBg: hov === s.id ? 'rgba(224,169,59,.18)' : 'transparent',
+        enter: () => this.setState({ hover: s.id }), leave: () => this.setState({ hover: null }) })),
+      tiles: TILES.map(([id, r, c]) => {
+        const act = STATES.some(s => s.id === id), ar = id === 'AR', on = hov === id;
+        return { id, gr: r + 1, gc: c + 1,
+          bg: on ? '#E0A93B' : act ? '#214935' : ar ? '#F2C66B' : 'rgba(33,73,53,.09)',
+          fg: on || ar ? '#17311F' : act ? '#fff' : '#5B6B60',
+          ol: ar ? '2px solid #C48A1C' : 'none' };
+      }),
+      conditions: ['Depression','Anxiety','PTSD','Addiction','Eating Disorders','OCD','End-of-Life Anxiety','Traumatic Brain Injury'].map((name, i) => ({ name, n: String(i + 1).padStart(2, '0') })),
+      board: [
+        { name: 'Joseph Hood, PhD', role: 'President', img: 'assets/board/joseph-hood.png', why: 'Depression treatments failed me. Psychedelic therapy didn\u2019t.' },
+        { name: 'Lisa Roark, MD', role: 'VP & Medical Director', img: 'assets/board/lisa-roark.png', why: 'A physician who became a patient.' },
+        { name: 'Sondra Cocheo', role: 'Treasurer', img: 'assets/board/sondra-cocheo.png', why: 'I found healing after years of struggle.' },
+        { name: 'Beth Day', role: 'Secretary & Director of Outreach', img: 'assets/board/beth-day.png', why: 'I healed from severe PTSD.' },
+        { name: 'J. Tristan Hudson, DDS', role: 'Medical & Legislative Strategy Advisor', img: 'assets/board/tristan-hudson.png', why: 'I lost my father to opioids.' },
+        { name: 'Kemmi Sadler', role: 'Law Enforcement & Veteran Partnerships · Ret. U.S. diplomat & federal agent', img: 'assets/board/kemmi-sadler.png', why: '26 years as a federal agent. Now I advocate for first responders.' },
+        { name: 'Chelsi Musick, CRNA', role: 'Clinical Practice Advisor', img: 'assets/board/chelsi-musick.png', why: 'Ketamine clinic owner since 2019.' },
+        { name: 'Blake Bulgar, APRN', role: 'Clinical Practice Advisor', img: 'assets/board/blake-bulgar.png', why: 'Vanderbilt-trained psychiatric NP.' }
+      ],
+      roles: [
+        { icon: 'icon-stethoscope', label: 'Doctors' },
+        { icon: 'icon-brain', label: 'Therapists' },
+        { icon: 'icon-shield', label: 'Veterans' },
+        { icon: 'icon-siren', label: 'First responders' },
+        { icon: 'icon-hand-heart', label: 'Patient advocates' },
+        { icon: 'icon-flask-conical', label: 'Researchers' },
+        { icon: 'icon-hospital', label: 'Healthcare workers' },
+        { icon: 'icon-users', label: 'Concerned citizens' }
+      ],
+      posts: [
+        { cat: 'Legislation', date: 'Oct 2, 2026', img: 'Arkansas State Capitol', title: 'Missouri, Iowa, Louisiana: Why Arkansas Can\u2019t Wait', excerpt: 'Our conservative neighbors are passing psilocybin therapy bills by wide margins. Here\u2019s what that means for 2027.' },
+        { cat: 'Research', date: 'Sep 18, 2026', img: 'clinical setting / researcher', title: 'What the Research Says About Psilocybin and PTSD', excerpt: 'A plain-language look at the clinical trials, what they found, and what they don\u2019t yet tell us.' },
+        { cat: 'Community', date: 'Sep 4, 2026', img: 'board members, Arkansas setting', title: 'Why Our Board Got Involved: Stories From Arkansans', excerpt: 'Physicians, veterans, and families share what brought them to this work.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
