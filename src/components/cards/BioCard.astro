@@ -1,0 +1,104 @@
+---
+/**
+ * BioCard — a board member's full profile for the About page: photo, name,
+ * role, their one-line quote, and a longer bio.
+ *
+ * Each card has an id (e.g. "joseph-hood") so the home page can link straight
+ * to it with /about#joseph-hood; the card highlights when you arrive that way.
+ */
+import { Image } from 'astro:assets';
+import type { BoardMember } from '../../data/board';
+
+interface Props {
+  member: BoardMember;
+}
+
+const { member } = Astro.props;
+const headingId = `${member.slug}-name`;
+---
+
+<article class="bio" id={member.slug} aria-labelledby={headingId}>
+  <Image class="photo" src={member.image} alt={`Portrait of ${member.name}`} width={193} />
+  <div class="text">
+    <h3 class="name" id={headingId}>{member.name}</h3>
+    <p class="role">{member.role}</p>
+    <p class="why">“{member.why}”</p>
+    {
+      member.bio ? (
+        <p class="about">{member.bio}</p>
+      ) : (
+        <p class="about pending">[Full bio to come.]</p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .bio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 100%;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  /* Highlight the card when someone arrives from a /about#name link */
+  .bio:target {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(33, 73, 53, 0.18);
+  }
+
+  .photo {
+    flex: 0 0 auto;
+    width: min(100%, 200px);
+    height: auto;
+    align-self: flex-start;
+    aspect-ratio: 193 / 134;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: 8px;
+    background: #e4e9e2;
+  }
+
+  .text {
+    display: flex;
+    flex: 1 1 240px;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--green-deep);
+  }
+  .role {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    color: var(--green);
+  }
+  .why {
+    margin-top: 4px;
+    font-size: 15px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--text-subtle);
+  }
+  .about {
+    margin-top: 6px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .pending {
+    font-size: 15px;
+    color: var(--text-subtle);
+  }
+</style>

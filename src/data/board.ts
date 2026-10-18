@@ -17,6 +17,11 @@ export interface BoardMember {
   /** The one-line "why I'm involved" quote shown on cards. */
   why: string;
   image: ImageMetadata;
+  /**
+   * Longer bio shown on the About page. Leave it out until the client supplies
+   * the text; the About page shows a "[Full bio to come.]" placeholder instead.
+   */
+  bio?: string;
 }
 
 // NOTE: the headshots supplied so far are only ~193px wide, so they look soft

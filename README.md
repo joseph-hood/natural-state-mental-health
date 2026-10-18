@@ -50,6 +50,7 @@ wrangler.jsonc        Cloudflare hosting settings
 
 - **Change wording on a card/list** (board members, states, bill points, nav links): edit the matching file in `src/data/`.
 - **Add a blog post:** copy one of the files in `src/content/blog/`, rename it (the file name becomes the web address), and edit the text. To add a photo, put it in `src/assets/` and add `image:` and `imageAlt:` to the post's top block.
+- **Add a board member's bio or edit the Statement of Purpose:** bios go in `src/data/board.ts` (add a `bio: '...'` line to the person; until then the About page shows "[Full bio to come.]"). The Statement of Purpose text is in `src/pages/about.astro`.
 - **Swap a board headshot:** replace the file in `src/assets/board/` with a larger photo using the **same file name**. The current headshots are only about 193px wide, so they look soft on cards.
 - **Change colors or fonts:** the `:root` block at the top of `src/styles/global.css`.
 

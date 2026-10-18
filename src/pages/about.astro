@@ -1,0 +1,111 @@
+---
+/**
+ * About page — Statement of Purpose and the full board. Address: /about
+ *
+ * CONTENT STATUS: the design supplied each board member's name, role, photo and
+ * one-line quote, but not full bios or a Statement of Purpose. Both are marked
+ * as placeholders below. To fill them in:
+ *   - bios: add a `bio: '...'` line to the person in src/data/board.ts
+ *   - statement: replace the text inside the "Prose" block in this file
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Prose from '../components/ui/Prose.astro';
+import BioCard from '../components/cards/BioCard.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import { SITE } from '../config/site';
+import { board } from '../data/board';
+---
+
+<BaseLayout title="About" description={SITE.description}>
+  <PageHeader eyebrow="About" title="About Natural State Mental Health.">
+    <p>
+      We're a group of concerned Arkansans working to pass legislation in 2027 that gives Arkansans access to
+      therapeutic psilocybin.
+    </p>
+  </PageHeader>
+
+  <Section tone="tint" id="statement-of-purpose" labelledby="purpose-heading">
+    <div class="purpose">
+      <SectionHeading id="purpose-heading" eyebrow="Who we are" title="Statement of purpose." />
+      <div class="statement">
+        <p class="draft">Draft · final wording to come</p>
+        <Prose>
+          <blockquote>Physician-led. Research-backed. Built for Arkansas.</blockquote>
+          <p>
+            We're looking for concerned individuals and groups to review our initiatives, call their
+            representatives, and sign on as official coalition members.
+          </p>
+          <p>Natural State Mental Health is a 501(c)(4) Social Welfare Organization.</p>
+          <!-- TODO: replace with the approved Statement of Purpose text from the client. -->
+          <p class="placeholder">[Full Statement of Purpose to come. Replace this section with the approved text.]</p>
+        </Prose>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="board" labelledby="board-heading">
+    <div class="stack">
+      <SectionHeading
+        id="board-heading"
+        eyebrow="Our board"
+        title="The people behind this."
+        maxWidth="680px"
+      >
+        <p>Physicians, clinicians, scientists, and public servants from across Arkansas.</p>
+      </SectionHeading>
+
+      <ul class="grid" role="list">
+        {
+          board.map((member) => (
+            <li>
+              <BioCard member={member} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .purpose {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+  .statement {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .draft {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--green-deep);
+  }
+  .placeholder {
+    color: var(--text-subtle);
+    font-style: italic;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+    gap: 20px;
+  }
+</style>
