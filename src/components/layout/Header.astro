@@ -150,9 +150,11 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     text-decoration-thickness: 2px;
     text-decoration-color: var(--gold);
   }
+  /* Hovered link, and the link for the page you are on (gold underline) */
   .nav-wide a:not(.btn):hover,
   .mobile-menu a:hover,
-  [aria-current='page'] {
+  .nav-wide a[aria-current='page'],
+  .mobile-menu a[aria-current='page'] {
     text-decoration-line: underline;
   }
 
