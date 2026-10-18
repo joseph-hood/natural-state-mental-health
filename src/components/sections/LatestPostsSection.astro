@@ -7,15 +7,17 @@ import PostCard from '../cards/PostCard.astro';
 
 interface Props {
   posts: CollectionEntry<'blog'>[];
+  /** Section heading. Change to e.g. "More from the blog" on a post page. */
+  title?: string;
 }
 
-const { posts } = Astro.props;
+const { posts, title = 'Latest from the blog' } = Astro.props;
 ---
 
 <Section divider labelledby="latest-posts-heading">
   <div class="stack">
     <div class="head">
-      <h2 id="latest-posts-heading" class="h2 title">Latest from the blog</h2>
+      <h2 id="latest-posts-heading" class="h2 title">{title}</h2>
       <ArrowLink href="/blog">All posts</ArrowLink>
     </div>
 
