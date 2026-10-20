@@ -3,6 +3,7 @@
 import { Picture } from 'astro:assets';
 import Landmark from '@lucide/astro/icons/landmark';
 import bridge from '../../assets/arkansas-river-bridge.jpg';
+import { donateLink } from '../../data/nav';
 import Button from '../ui/Button.astro';
 ---
 
@@ -18,7 +19,7 @@ import Button from '../ui/Button.astro';
         therapeutic psilocybin.
       </p>
       <div class="actions">
-        <Button href="/donate">Donate</Button>
+        <Button href={donateLink.href}>{donateLink.label}</Button>
         <Button href="/join" variant="outline">Join the Coalition</Button>
       </div>
     </div>

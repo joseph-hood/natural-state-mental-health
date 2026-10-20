@@ -1,0 +1,97 @@
+---
+/**
+ * BoardBio — one board member's full bio on the About page: headshot beside the
+ * name, position, day-job line and bio paragraphs. The id lets the home page
+ * cards link straight to it (/about#joseph-hood).
+ */
+import { Image } from 'astro:assets';
+import type { BoardMember } from '../../data/board';
+
+interface Props {
+  member: BoardMember;
+}
+
+const { member } = Astro.props;
+---
+
+<article class="bio" id={member.slug} aria-labelledby={`${member.slug}-name`}>
+  <!-- The headshots are only ~193px wide, so they are shown at that size to stay as sharp as possible. -->
+  <Image class="photo" src={member.image} alt={`Portrait of ${member.name}`} width={193} />
+  <div class="text">
+    <header class="head">
+      <h3 class="name" id={`${member.slug}-name`}>{member.name}</h3>
+      <p class="role">{member.role}</p>
+      <p class="headline">{member.headline}</p>
+    </header>
+    <div class="body">
+      {member.bio.map((paragraph) => <p set:html={paragraph} />)}
+    </div>
+  </div>
+</article>
+
+<style>
+  .bio {
+    display: grid;
+    grid-template-columns: 193px minmax(0, 1fr);
+    gap: 24px clamp(24px, 4vw, 48px);
+    padding-block: 36px;
+    border-top: 1px solid var(--line-strong);
+  }
+  @media (max-width: 640px) {
+    .bio {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .photo {
+    width: 193px;
+    max-width: 100%;
+    aspect-ratio: 193 / 134;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #e4e9e2;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 720px;
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(24px, 2.4vw, 30px);
+    line-height: 1.15;
+    color: var(--green-deep);
+  }
+  .role {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    color: var(--green);
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+</style>

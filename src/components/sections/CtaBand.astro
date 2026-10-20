@@ -3,6 +3,7 @@
  * CtaBand — a short "take action" banner with Donate and Join buttons.
  * Reusable at the bottom of any page; text can be overridden.
  */
+import { donateLink } from '../../data/nav';
 import Section from '../ui/Section.astro';
 import Button from '../ui/Button.astro';
 
@@ -24,7 +25,7 @@ const {
       <p>{text}</p>
     </div>
     <div class="actions">
-      <Button href="/donate">Donate</Button>
+      <Button href={donateLink.href}>{donateLink.label}</Button>
       <Button href="/join" variant="outline">Join the Coalition</Button>
     </div>
   </div>

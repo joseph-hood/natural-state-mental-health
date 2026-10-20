@@ -1,20 +1,34 @@
 ---
-/** The three big numbers under the hero, with their source. */
+/**
+ * The big numbers under the hero, split evenly across the full width, with their source.
+ * A stat can have a photo above its number (see `stats` in src/data/states.ts).
+ */
+import { Picture } from 'astro:assets';
 import { stats, statsSource } from '../../data/states';
 import Section from '../ui/Section.astro';
 ---
 
 <Section padTop={false} label="Key facts">
-  <dl class="stats">
+  <ul class="stats" role="list">
     {
       stats.map((stat) => (
-        <div class="stat">
-          <dt class="figure">{stat.figure}</dt>
-          <dd class="text">{stat.text}</dd>
-        </div>
+        <li class="stat">
+          {stat.image && (
+            <Picture
+              src={stat.image}
+              alt={stat.imageAlt ?? ''}
+              formats={['avif', 'webp']}
+              widths={[400, 640, 960, 1280]}
+              sizes="(min-width: 1000px) 610px, (min-width: 720px) 50vw, 100vw"
+              class="photo"
+            />
+          )}
+          <p class="figure">{stat.figure}</p>
+          <p class="text">{stat.text}</p>
+        </li>
       ))
     }
-  </dl>
+  </ul>
   <p class="source">
     Source: <a href={statsSource.survey.href}>{statsSource.survey.label}</a> ({statsSource.sample}), via{' '}
     <a href={statsSource.via.href}>{statsSource.via.label}</a>.
@@ -24,16 +38,32 @@ import Section from '../ui/Section.astro';
 <style>
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    column-gap: 28px;
     border-top: 2px solid var(--green);
   }
+  /*
+   * Each stat spans three rows of the grid (photo / number / caption) and shares
+   * them with its neighbours, so the numbers line up even when a stat has no photo.
+   */
   .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 28px 28px 8px 0;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    padding: 28px 0 8px;
+  }
+  .photo {
+    grid-row: 1;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    margin-bottom: 22px;
+    border-radius: 10px;
   }
   .figure {
+    grid-row: 2;
+    margin-bottom: 8px;
     font-family: var(--font-serif);
     font-weight: 600;
     font-size: clamp(48px, 4.6vw, 64px);
@@ -41,6 +71,7 @@ import Section from '../ui/Section.astro';
     color: var(--green);
   }
   .text {
+    grid-row: 3;
     margin: 0;
     max-width: 22em;
     color: var(--text);

@@ -24,4 +24,4 @@ Three things readers can do now:
 - [Placeholder action two]
 - [Placeholder action three]
 
-Ready to help? [Join the coalition](/join) or [make a donation](/donate).
+Ready to help? [Join the coalition](/join) or [make a donation](https://givebutter.com/naturalstatemh).
