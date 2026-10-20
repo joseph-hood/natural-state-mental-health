@@ -50,6 +50,7 @@ wrangler.jsonc        Cloudflare hosting settings
 
 - **Change wording on a card/list** (board members, states, bill points, nav links): edit the matching file in `src/data/`.
 - **Add a blog post:** copy one of the files in `src/content/blog/`, rename it (the file name becomes the web address), and edit the text. To add a photo, put it in `src/assets/` and add `image:` and `imageAlt:` to the post's top block.
+- **Change the photos above the 72% / 55% numbers:** replace `src/assets/signing-ceremony.jpg` or `src/assets/listening-circle.jpg` with a new photo using the **same file name** (16:9 landscape works best). To change the photo's description for screen readers, edit `imageAlt` in `stats` in `src/data/states.ts`.
 - **Swap a board headshot:** replace the file in `src/assets/board/` with a larger photo using the **same file name**. The current headshots are only about 193px wide, so they look soft on cards.
 - **Change colors or fonts:** the `:root` block at the top of `src/styles/global.css`.
 
