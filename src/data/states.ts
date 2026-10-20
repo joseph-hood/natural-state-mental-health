@@ -1,3 +1,7 @@
+import type { ImageMetadata } from 'astro';
+import signingCeremony from '../assets/signing-ceremony.jpg';
+import listeningCircle from '../assets/listening-circle.jpg';
+
 /**
  * "It's About Time" — what other states have done.
  * Copy comes from the approved design. Double-check every figure with the
@@ -24,10 +28,30 @@ export const states: StateAction[] = [
   { id: 'NM', name: 'New Mexico', big: 'First', note: 'Legislature-created medical psilocybin program.' },
 ];
 
+export interface Stat {
+  figure: string;
+  text: string;
+  /** Optional photo shown above the number. */
+  image?: ImageMetadata;
+  /** Describes the photo for screen readers. Required whenever `image` is set. */
+  imageAlt?: string;
+}
+
 /** The big three numbers under the hero. */
-export const stats = [
-  { figure: '72%', text: 'of U.S. voters back legal therapeutic access to psychedelics.' },
-  { figure: '55%', text: 'say they or someone close to them has used psychedelics.' },
+export const stats: Stat[] = [
+  {
+    figure: '72%',
+    text: 'of U.S. voters back legal therapeutic access to psychedelics.',
+    image: signingCeremony,
+    imageAlt:
+      'A signing ceremony in the White House: a seated man holds up a signed document while people standing behind the desk applaud.',
+  },
+  {
+    figure: '55%',
+    text: 'say they or someone close to them has used psychedelics.',
+    image: listeningCircle,
+    imageAlt: 'A small group sits in a circle in a living room with bookshelves, talking and listening to each other.',
+  },
   {
     figure: 'Never',
     text: 'Arkansas is one of only a few states that has never attempted psychedelic legislation.',
