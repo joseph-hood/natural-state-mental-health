@@ -1,0 +1,118 @@
+---
+/**
+ * Join the Coalition page. Address: /join
+ * Embeds the Google Form set in SITE.coalitionFormUrl (src/config/site.ts).
+ *
+ * The form runs inside Google's own page, so this page can't read its height.
+ * The heights in the <style> block at the bottom were measured from the real
+ * form (about 2,390px tall at desktop width, up to about 2,880px on a phone).
+ * If questions are added to the form, or it ever gets cut off (scrolls inside
+ * the frame) or leaves a big gap, adjust those `height` values.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Section from '../components/ui/Section.astro';
+import RoleChips from '../components/ui/RoleChips.astro';
+import { SITE } from '../config/site';
+
+// "?embedded=true" tells Google to drop its page chrome so it fits in a frame.
+const embedUrl = `${SITE.coalitionFormUrl}?embedded=true`;
+---
+
+<BaseLayout
+  title="Join the Coalition"
+  description="Add your name to the Natural State Mental Health coalition: concerned individuals and groups working to pass psilocybin legislation in Arkansas."
+>
+  <PageHeader eyebrow="Join the coalition" title="Add your name. Add your voice.">
+    <p>
+      We're looking for concerned individuals and groups to review our initiatives, call their representatives,
+      and sign on as official coalition members.
+    </p>
+  </PageHeader>
+
+  <Section padTop={false} labelledby="form-heading">
+    <div class="grid">
+      <div class="side">
+        <h2 id="form-heading" class="side-title">Who we're looking for</h2>
+        <RoleChips />
+        <p class="alt">
+          Having trouble with the form?{' '}
+          <a href={SITE.coalitionFormUrl} target="_blank" rel="noopener"
+            >Open it in a new tab<span class="sr-only"> (opens in a new tab)</span></a
+          >.
+        </p>
+      </div>
+
+      <div class="embed">
+        <iframe
+          src={embedUrl}
+          title="Join the Coalition sign-up form"
+          loading="lazy"
+          width="100%"
+          height="2500"></iframe>
+        <p class="hosted">This form is hosted by Google Forms.</p>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 40px;
+    align-items: start;
+  }
+  @media (min-width: 1100px) {
+    .grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(36px, 5vw, 72px);
+    }
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .side-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(24px, 2.2vw, 30px);
+    line-height: 1.2;
+    color: var(--green-deep);
+  }
+  .alt {
+    font-size: 16px;
+    color: var(--text);
+  }
+  .alt a {
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  .embed iframe {
+    display: block;
+    width: 100%;
+    height: 2500px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+  }
+  /* Stacked layout: the frame is a bit wider, so the form is a bit shorter. */
+  @media (max-width: 1099px) {
+    .embed iframe {
+      height: 2450px;
+    }
+  }
+  /* Phones wrap the questions onto more lines, so the form is taller. */
+  @media (max-width: 640px) {
+    .embed iframe {
+      height: 2950px;
+    }
+  }
+  .hosted {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+</style>
