@@ -1,25 +1,28 @@
 ---
 /**
- * About page — the organization's Statement of Purpose. Address: /about
- * The header "About" link and the footer "Statement of Purpose" link
- * (/about#statement-of-purpose) both point here. The wording is the client's
- * own, so edit it only with their approval.
+ * About page — the Statement of Purpose, then the board bios. Address: /about
+ * Other pages link to two spots here: the footer goes to #statement-of-purpose,
+ * and the home page board cards go to #board and #<member-slug>.
+ * The statement's wording is the client's own, so edit it only with their approval.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/ui/PageHeader.astro';
 import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
 import Prose from '../components/ui/Prose.astro';
+import BoardBiosSection from '../components/sections/BoardBiosSection.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
 ---
 
 <BaseLayout
   title="About"
-  description="Natural State Mental Health is a 501(c)(4) social welfare organization advocating for and educating the public on natural medicine options for mental health, with a focus on psilocybin."
+  description="Natural State Mental Health is a 501(c)(4) social welfare organization advocating for and educating the public on natural medicine options for mental health, with a focus on psilocybin. Meet our board."
 >
-  <div id="statement-of-purpose">
-    <PageHeader eyebrow="About" title="Statement of Purpose" />
+  <PageHeader title="About Natural State Mental Health." />
 
-    <Section padTop={false} label="Statement of Purpose">
+  <Section tone="tint" id="statement-of-purpose" labelledby="statement-heading">
+    <div class="stack">
+      <SectionHeading id="statement-heading" title="Statement of Purpose" />
       <Prose>
         <p>
           Natural State Mental Health is organized as a social welfare organization under Section 501(c)(4) of the
@@ -57,8 +60,18 @@ import CtaBand from '../components/sections/CtaBand.astro';
           activities that would jeopardize our 501(c)(4) status.
         </p>
       </Prose>
-    </Section>
-  </div>
+    </div>
+  </Section>
+
+  <BoardBiosSection />
 
   <CtaBand />
 </BaseLayout>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+</style>

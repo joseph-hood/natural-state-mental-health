@@ -1,0 +1,36 @@
+---
+/**
+ * "The people behind this" — every board member's full bio, one after another.
+ * Used on the About page. Each bio has an id, so the home page cards link
+ * straight to it (/about#joseph-hood), and "Meet the full board" goes to #board.
+ */
+import { board } from '../../data/board';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import BoardBio from '../cards/BoardBio.astro';
+---
+
+<Section id="board" labelledby="board-bios-heading">
+  <div class="stack">
+    <SectionHeading
+      id="board-bios-heading"
+      eyebrow="Our board"
+      title="The people behind this."
+      maxWidth="680px"
+    >
+      <p>Physicians, clinicians, scientists, and public servants from across Arkansas.</p>
+    </SectionHeading>
+
+    <div>
+      {board.map((member) => <BoardBio member={member} />)}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+</style>
