@@ -5,10 +5,14 @@ export interface NavLink {
   href: string;
 }
 
-/** Links shown in the header (the Donate button is separate). */
+/**
+ * Links shown in the header (the Donate button is separate).
+ * "The Legislation" jumps to the "2027 bill" section on the home page; there is
+ * no separate Legislation page.
+ */
 export const mainNav: NavLink[] = [
   { label: 'About', href: '/about' },
-  { label: 'The Legislation', href: '/legislation' },
+  { label: 'The Legislation', href: '/#the-bill' },
   { label: 'Join the Coalition', href: '/join' },
   { label: 'Blog', href: '/blog' },
 ];
@@ -29,7 +33,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
   {
     heading: 'Take action',
     links: [
-      { label: 'The Legislation', href: '/legislation' },
+      { label: 'The Legislation', href: '/#the-bill' },
       { label: 'Join the Coalition', href: '/join' },
       { label: 'Practitioner Survey', href: SITE.practitionerSurveyUrl },
     ],

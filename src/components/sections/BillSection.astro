@@ -7,7 +7,7 @@ import SectionHeading from '../ui/SectionHeading.astro';
 import Button from '../ui/Button.astro';
 ---
 
-<Section tone="green" labelledby="bill-heading">
+<Section tone="green" id="the-bill" labelledby="bill-heading">
   <div class="grid">
     <div class="copy">
       <SectionHeading
@@ -25,7 +25,6 @@ import Button from '../ui/Button.astro';
         <Button href={`mailto:${SITE.email}?subject=Draft%20legislation%20request`}>
           Request the draft legislation
         </Button>
-        <a class="summary" href="/legislation">Read the summary</a>
       </div>
     </div>
 
@@ -88,16 +87,6 @@ import Button from '../ui/Button.astro';
     align-items: center;
     gap: 12px;
     margin-top: 8px;
-  }
-  .summary {
-    padding: 15px 6px;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  .summary:hover {
-    color: var(--gold-light);
   }
 
   .points {
