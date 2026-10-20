@@ -11,6 +11,7 @@ import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import ArrowLink from '../ui/ArrowLink.astro';
 import StateCard from '../cards/StateCard.astro';
+import StateOutline from '../ui/StateOutline.astro';
 ---
 
 <Section tone="tint" labelledby="about-time-heading">
@@ -34,6 +35,7 @@ import StateCard from '../cards/StateCard.astro';
       }
       <li>
         <article class="ark">
+          <StateOutline id="AR" corner />
           <h3 class="name">Arkansas</h3>
           <p class="big">2027</p>
           <p class="note">Never attempted. Let's change that.</p>
@@ -62,6 +64,7 @@ import StateCard from '../cards/StateCard.astro';
 
   /* Arkansas's own card: warm background + dashed border to stand out */
   .ark {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -71,6 +74,9 @@ import StateCard from '../cards/StateCard.astro';
     border: 1.5px dashed var(--gold-dark);
     border-radius: 10px;
     --link-color: var(--green-deep);
+    /* Gold outline, to match the card. */
+    --outline-stroke: var(--gold-dark);
+    --outline-fill: rgba(224, 169, 59, 0.22);
   }
   .name {
     font-size: 14px;
