@@ -63,15 +63,15 @@ Search the project for `TODO` to find every spot that needs a decision:
 
 - **Join the Coalition** uses a Google Form. Its link is `coalitionFormUrl` in `src/config/site.ts`, and the `/join` page embeds it. Responses go to the Google account that owns the form. If the embedded form gets cut off or leaves a big gap, adjust the two `height` values at the bottom of `src/pages/join.astro`.
 - **Alerts sign-up form (`src/scripts/form-todo.ts`)**: looks and validates correctly, but **submissions are not connected**. Pressing the button shows a "not connected yet" message and sends nothing. Decide where submissions should go (email, a CRM, a spreadsheet, ...) and replace the placeholder in that one file.
-- **Practitioner survey link** (`src/config/site.ts`): currently `#`.
-- **Privacy Policy page**: the alerts form links to `/privacy`, which does not exist yet. Text-message sign-ups normally require one.
+- **Practitioner survey** uses a Google Form. Its link is `practitionerSurveyUrl` in `src/config/site.ts` (used by the top banner and the footer).
+- **Privacy Policy page**: none exists yet, so the alerts form's text-message notice has no "See our Privacy Policy" link. When a policy is published, restore the link (instructions are in the comment at the top of `src/components/forms/AlertSignupForm.astro`). Text-message sign-ups normally require one.
 - **"Read the research summary" link** on the home page points at the research blog post for now.
 
 ## Before launch
 
 1. In `src/config/site.ts`, set `noindex: false` so search engines can list the site.
 2. Replace the placeholder blog post bodies and confirm every figure on the home page with the client.
-3. Connect the alerts form and add the real survey link and privacy policy.
+3. Connect the alerts form (it says "Coming soon…" for now) and add a privacy policy.
 4. Add a sitemap and social-share image if wanted.
 
 ## Deploying
