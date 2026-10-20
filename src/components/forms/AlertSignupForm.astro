@@ -3,9 +3,13 @@
  * AlertSignupForm — email + optional mobile number for legislative alerts.
  *
  * TODO(forms): submission is a placeholder. See src/scripts/form-todo.ts.
- * TODO(legal): the "Privacy Policy" link points to /privacy, a page that
- * doesn't exist yet. Text-message programs normally require a published
- * privacy policy, so one needs to be written and added.
+ * Alerts are not switched on yet, so the form says "(Coming soon…)" under the button.
+ *
+ * TODO(legal): the text-message notice used to end with "See our Privacy
+ * Policy." linking to /privacy. That sentence is left out because no privacy
+ * page exists yet. When one is published, restore it at the end of the notice:
+ *   See our{' '}<a href="/privacy">Privacy Policy</a>.
+ * Text-message programs normally require a published privacy policy.
  */
 import Button from '../ui/Button.astro';
 import Field from './Field.astro';
@@ -43,10 +47,10 @@ const { idPrefix = 'alerts' } = Astro.props;
   </div>
   <Button type="submit" variant="solid" block>Sign up for alerts</Button>
   <p class="status" role="status" data-form-status hidden></p>
+  <p class="soon">(Coming soon…)</p>
   <p class="legal">
     By providing your mobile number, you agree to receive recurring text messages from Natural State Mental
-    Health. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our{' '}
-    <a href="/privacy">Privacy Policy</a>.
+    Health. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
   </p>
 </form>
 
@@ -67,13 +71,11 @@ const { idPrefix = 'alerts' } = Astro.props;
   }
   /* The input borders sit on the sand-coloured panel; Field's default
      border colour already passes contrast there. */
+  .soon,
   .legal {
     font-size: 13px;
     line-height: 1.5;
     color: #4a5248;
-  }
-  .legal a {
-    color: var(--green-deep);
   }
   .status {
     padding: 12px 14px;

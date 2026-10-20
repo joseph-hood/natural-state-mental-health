@@ -17,10 +17,11 @@ export const SITE = {
   noindex: true,
 
   /**
-   * TODO: replace with the real practitioner survey link.
-   * It is used by the announcement bar and the footer.
+   * The Google Form behind the "Take our practitioner survey" links (the top
+   * banner and the footer). This is the form's public respondent link.
    */
-  practitionerSurveyUrl: '#',
+  practitionerSurveyUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSc33QTTcPNnq9qzBQFJemen0FtXH8zTDtkOv4IL2dz8TaTz8g/viewform',
 
   /**
    * The Google Form behind "Join the Coalition". This is the form's public

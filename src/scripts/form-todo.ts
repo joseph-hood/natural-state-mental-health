@@ -20,7 +20,7 @@ function handleSubmit(event: SubmitEvent) {
 
   if (status) {
     status.textContent =
-      'Thanks! This is a preview: the form is not connected yet, so nothing was sent.';
+      'Thanks for your interest! Alerts are coming soon, so nothing was sent yet. Please check back.';
     status.hidden = false;
   }
 }
