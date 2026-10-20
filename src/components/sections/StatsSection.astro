@@ -1,6 +1,6 @@
 ---
 /**
- * The three big numbers under the hero, with their source.
+ * The big numbers under the hero, split evenly across the full width, with their source.
  * A stat can have a photo above its number (see `stats` in src/data/states.ts).
  */
 import { Picture } from 'astro:assets';
@@ -18,8 +18,8 @@ import Section from '../ui/Section.astro';
               src={stat.image}
               alt={stat.imageAlt ?? ''}
               formats={['avif', 'webp']}
-              widths={[360, 540, 720, 1080]}
-              sizes="(min-width: 980px) 365px, (min-width: 640px) 50vw, 100vw"
+              widths={[400, 640, 960, 1280]}
+              sizes="(min-width: 1000px) 610px, (min-width: 720px) 50vw, 100vw"
               class="photo"
             />
           )}
@@ -38,7 +38,7 @@ import Section from '../ui/Section.astro';
 <style>
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
     column-gap: 28px;
     border-top: 2px solid var(--green);
   }

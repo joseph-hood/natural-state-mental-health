@@ -37,7 +37,7 @@ export interface Stat {
   imageAlt?: string;
 }
 
-/** The big three numbers under the hero. */
+/** The two big numbers under the hero. */
 export const stats: Stat[] = [
   {
     figure: '72%',
@@ -51,10 +51,6 @@ export const stats: Stat[] = [
     text: 'say they or someone close to them has used psychedelics.',
     image: listeningCircle,
     imageAlt: 'A small group sits in a circle in a living room with bookshelves, talking and listening to each other.',
-  },
-  {
-    figure: 'Never',
-    text: 'Arkansas is one of only a few states that has never attempted psychedelic legislation.',
   },
 ];
 
