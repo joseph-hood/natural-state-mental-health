@@ -1,0 +1,64 @@
+---
+/**
+ * About page — the organization's Statement of Purpose. Address: /about
+ * The header "About" link and the footer "Statement of Purpose" link
+ * (/about#statement-of-purpose) both point here. The wording is the client's
+ * own, so edit it only with their approval.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Section from '../components/ui/Section.astro';
+import Prose from '../components/ui/Prose.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Natural State Mental Health is a 501(c)(4) social welfare organization advocating for and educating the public on natural medicine options for mental health, with a focus on psilocybin."
+>
+  <div id="statement-of-purpose">
+    <PageHeader eyebrow="About" title="Statement of Purpose" />
+
+    <Section padTop={false} label="Statement of Purpose">
+      <Prose>
+        <p>
+          Natural State Mental Health is organized as a social welfare organization under Section 501(c)(4) of the
+          Internal Revenue Code, or the corresponding section of any future federal tax code. Our primary purpose is
+          to promote the common good and general welfare of the community by advocating for and educating the public
+          on natural medicine options for mental health, with a particular focus on the therapeutic potential of
+          psilocybin.
+        </p>
+        <p>
+          We believe that individuals should have access to a comprehensive range of safe, effective, and
+          evidence-based mental health treatments, including those derived from natural sources. Through research,
+          public education, and legislative advocacy, Natural State Mental Health aims to:
+        </p>
+        <ul>
+          <li>
+            <strong>Advance the understanding and acceptance of natural medicine in mental healthcare:</strong> We will
+            disseminate accurate, science-backed information about the efficacy and safety of psilocybin and other
+            natural compounds for treating various mental health conditions.
+          </li>
+          <li>
+            <strong>Promote responsible and equitable access to natural medicine therapies:</strong> We will advocate
+            for policies that facilitate the research, development, and regulated use of natural medicines, ensuring
+            that these options are available to those who can benefit from them, regardless of socioeconomic status.
+          </li>
+          <li>
+            <strong>Engage in legislative and regulatory advocacy:</strong> We will actively work with lawmakers and
+            regulatory bodies to shape policies that support research into natural medicine, facilitate its
+            integration into mainstream mental healthcare, and ensure appropriate oversight and patient protections.
+          </li>
+        </ul>
+        <p>
+          Natural State Mental Health is committed to improving mental health outcomes by championing innovative,
+          natural approaches and empowering individuals with knowledge and choices for their well-being. Our
+          activities will primarily focus on non-partisan education and advocacy, and we will not engage in any
+          activities that would jeopardize our 501(c)(4) status.
+        </p>
+      </Prose>
+    </Section>
+  </div>
+
+  <CtaBand />
+</BaseLayout>
