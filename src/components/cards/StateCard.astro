@@ -1,6 +1,7 @@
 ---
 /** StateCard — one "what this state did" tile. Put each inside an <li>. */
 import type { StateAction } from '../../data/states';
+import StateOutline from '../ui/StateOutline.astro';
 
 interface Props {
   state: StateAction;
@@ -10,6 +11,7 @@ const { state } = Astro.props;
 ---
 
 <article class="state-card">
+  <StateOutline id={state.id} corner />
   <h3 class="name">{state.name}</h3>
   <p class="big">{state.big}</p>
   <p class="note">{state.note}</p>
@@ -17,6 +19,7 @@ const { state } = Astro.props;
 
 <style>
   .state-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;

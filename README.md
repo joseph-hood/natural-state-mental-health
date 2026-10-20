@@ -50,6 +50,7 @@ wrangler.jsonc        Cloudflare hosting settings
 
 - **Change wording on a card/list** (board members, states, bill points, nav links): edit the matching file in `src/data/`.
 - **Add a blog post:** copy one of the files in `src/content/blog/`, rename it (the file name becomes the web address), and edit the text. To add a photo, put it in `src/assets/` and add `image:` and `imageAlt:` to the post's top block.
+- **Add a state to the "It's About Time" cards:** add it to `states` in `src/data/states.ts`, then run `node scripts/build-state-outlines.mjs` with every state code the site needs (the steps are at the top of that script) to draw its outline.
 - **Edit a board member's bio or add a member:** edit `src/data/board.ts`. `bio` holds the About page paragraphs (one entry per paragraph), `headline` is the line under the name, and `why` is the short quote on the home page card.
 - **Edit the Statement of Purpose:** it's written directly in `src/pages/about.astro`. Get the client's approval before changing the wording.
 - **Change the photos above the 72% / 55% numbers:** replace `src/assets/signing-ceremony.jpg` or `src/assets/listening-circle.jpg` with a new photo using the **same file name** (16:9 landscape works best). To change the photo's description for screen readers, edit `imageAlt` in `stats` in `src/data/states.ts`.
