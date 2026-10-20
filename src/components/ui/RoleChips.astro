@@ -1,0 +1,42 @@
+---
+/**
+ * RoleChips — the small icon tiles listing who the coalition is looking for
+ * (doctors, therapists, veterans, ...). The list comes from src/data/coalition.ts.
+ */
+import { memberTypes } from '../../data/coalition';
+---
+
+<ul class="roles" role="list">
+  {
+    memberTypes.map(({ label, icon: Icon }) => (
+      <li class="role">
+        <Icon size={20} />
+        {label}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .role {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid rgba(33, 73, 53, 0.16);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--green-deep);
+  }
+  .role :global(svg) {
+    flex: none;
+    color: var(--green);
+  }
+</style>

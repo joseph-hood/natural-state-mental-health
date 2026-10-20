@@ -22,6 +22,15 @@ export const SITE = {
    */
   practitionerSurveyUrl: '#',
 
+  /**
+   * The Google Form behind "Join the Coalition". This is the form's public
+   * respondent link (not its private editing link). Responses go to the Google
+   * account that owns the form, where they can be viewed or sent to a Sheet.
+   * The /join page embeds it and also offers a link to open it in a new tab.
+   */
+  coalitionFormUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSdSZIxDjl2TWl4Pit1XjRqXskyWMDKJF4oSZMVvjSYOYRz0TA/viewform',
+
   /** The Givebutter campaign that powers the Donate page. */
   givebutterUrl: 'https://givebutter.com/naturalstatemh',
 } as const;
