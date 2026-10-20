@@ -22,6 +22,6 @@ export const SITE = {
    */
   practitionerSurveyUrl: '#',
 
-  /** The Givebutter campaign that powers the Donate page. */
+  /** The Givebutter campaign that every Donate button links to (see donateLink in src/data/nav.ts). */
   givebutterUrl: 'https://givebutter.com/naturalstatemh',
 } as const;

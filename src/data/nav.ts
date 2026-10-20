@@ -13,7 +13,8 @@ export const mainNav: NavLink[] = [
   { label: 'Blog', href: '/blog' },
 ];
 
-export const donateLink: NavLink = { label: 'Donate', href: '/donate' };
+/** Every Donate button on the site uses this. It goes straight to the Givebutter campaign. */
+export const donateLink: NavLink = { label: 'Donate', href: SITE.givebutterUrl };
 
 /** Link columns in the footer. */
 export const footerNav: { heading: string; links: NavLink[] }[] = [
