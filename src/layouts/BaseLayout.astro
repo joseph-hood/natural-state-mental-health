@@ -1,0 +1,86 @@
+---
+/**
+ * BaseLayout — wraps every page: <head> tags, skip link, header, footer.
+ *
+ *   <BaseLayout title="About" description="Who we are.">
+ *     ...page content...
+ *   </BaseLayout>
+ */
+// Fonts are self-hosted (installed from npm), so visitors' browsers never
+// contact Google. Source Serif 4 = headings, Source Sans 3 = body text.
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource-variable/source-sans-3/wght.css';
+import '@fontsource-variable/source-sans-3/wght-italic.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '../styles/global.css';
+
+import { SITE } from '../config/site';
+import AnnouncementBar from '../components/layout/AnnouncementBar.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  /** Page name. Leave out on the home page. */
+  title?: string;
+  description?: string;
+  /** Show the practitioner-survey banner above the header. */
+  announcement?: boolean;
+}
+
+const { title, description = SITE.description, announcement = true } = Astro.props;
+
+const pageTitle = title
+  ? `${title} | ${SITE.name}`
+  : `${SITE.name} | Advancing Psilocybin Legislation in Arkansas`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      CLIENT PREVIEW: asks search engines not to list this site.
+      Controlled by `noindex` in src/config/site.ts — set it to false at launch.
+    -->
+    {SITE.noindex && <meta name="robots" content="noindex" />}
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {!SITE.noindex && <link rel="canonical" href={canonical} />}
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Lets our CSS know JavaScript is available (used by the mobile menu). -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    {announcement && <AnnouncementBar />}
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  /* The skip link focuses <main>; no ring needed around the whole page. */
+  main:focus {
+    outline: none;
+  }
+</style>

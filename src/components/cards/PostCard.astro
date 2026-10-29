@@ -1,0 +1,127 @@
+---
+/**
+ * PostCard — a blog post teaser: image, category + date, title, excerpt.
+ * Whole card is clickable via the title link.
+ *
+ * Posts without a photo show a striped placeholder with the `imageLabel` text
+ * (see src/content.config.ts). Add `image` + `imageAlt` to a post's front
+ * matter to replace the placeholder with a real picture.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../../utils/format';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, category, pubDate, image, imageAlt, imageLabel } = post.data;
+---
+
+<article class="post-card">
+  <div class="media">
+    {
+      image ? (
+        <Image
+          src={image}
+          alt={imageAlt ?? ''}
+          width={640}
+          widths={[320, 480, 640, 960]}
+          sizes="(min-width: 960px) 380px, (min-width: 640px) 45vw, 100vw"
+          class="img"
+        />
+      ) : (
+        <div class="placeholder" aria-hidden="true">
+          {imageLabel}
+        </div>
+      )
+    }
+  </div>
+  <p class="meta">
+    <span class="cat">{category}</span>
+    <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+  </p>
+  <h3 class="title"><a href={`/blog/${post.id}`}>{title}</a></h3>
+  <p class="excerpt">{description}</p>
+</article>
+
+<style>
+  .post-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 12px;
+    text-align: center;
+    background: repeating-linear-gradient(135deg, #e4e9e2 0 10px, #eef1eb 10px 20px);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-subtle);
+  }
+
+  .meta {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .meta time {
+    font-weight: 500;
+    color: var(--text-subtle);
+  }
+
+  .title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.25;
+    text-wrap: pretty;
+  }
+  .title a {
+    color: var(--green-deep);
+    text-decoration: none;
+  }
+  /* Stretches the link's click area over the whole card. */
+  .title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .post-card:hover .title a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .post-card:has(a:focus-visible) {
+    outline: 3px solid var(--focus);
+    outline-offset: 6px;
+    border-radius: 8px;
+  }
+  .title a:focus-visible {
+    outline: none;
+  }
+
+  .excerpt {
+    font-size: 16px;
+    color: var(--text);
+  }
+</style>

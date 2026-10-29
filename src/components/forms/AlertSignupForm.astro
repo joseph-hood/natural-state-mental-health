@@ -1,0 +1,88 @@
+---
+/**
+ * AlertSignupForm — email + optional mobile number for legislative alerts.
+ *
+ * TODO(forms): submission is a placeholder. See src/scripts/form-todo.ts.
+ * Alerts are not switched on yet, so the form says "(Coming soon…)" under the button.
+ *
+ * TODO(legal): the text-message notice used to end with "See our Privacy
+ * Policy." linking to /privacy. That sentence is left out because no privacy
+ * page exists yet. When one is published, restore it at the end of the notice:
+ *   See our{' '}<a href="/privacy">Privacy Policy</a>.
+ * Text-message programs normally require a published privacy policy.
+ */
+import Button from '../ui/Button.astro';
+import Field from './Field.astro';
+
+interface Props {
+  idPrefix?: string;
+}
+
+const { idPrefix = 'alerts' } = Astro.props;
+---
+
+<form class="alert-form" method="post" data-form-todo aria-label="Legislative alerts sign-up">
+  <div class="row">
+    <Field
+      id={`${idPrefix}-email`}
+      name="email"
+      label="Email address"
+      type="email"
+      autocomplete="email"
+      placeholder="Email address"
+      size="lg"
+      required
+      hideLabel
+    />
+    <Field
+      id={`${idPrefix}-mobile`}
+      name="mobile"
+      label="Mobile number (optional)"
+      type="tel"
+      autocomplete="tel"
+      placeholder="Mobile (optional)"
+      size="lg"
+      hideLabel
+    />
+  </div>
+  <Button type="submit" variant="solid" block>Sign up for alerts</Button>
+  <p class="status" role="status" data-form-status hidden></p>
+  <p class="soon">(Coming soon…)</p>
+  <p class="legal">
+    By providing your mobile number, you agree to receive recurring text messages from Natural State Mental
+    Health. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
+  </p>
+</form>
+
+<script>
+  import '../../scripts/form-todo.ts';
+</script>
+
+<style>
+  .alert-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  /* The input borders sit on the sand-coloured panel; Field's default
+     border colour already passes contrast there. */
+  .soon,
+  .legal {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4a5248;
+  }
+  .status {
+    padding: 12px 14px;
+    border-left: 4px solid var(--gold-dark);
+    background: #fff;
+    border-radius: 4px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+</style>

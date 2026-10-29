@@ -1,0 +1,55 @@
+---
+/**
+ * StateOutline — a small outline of a state, e.g. <StateOutline id="MO" />.
+ * Purely decorative: the state's name is always written next to it, so screen
+ * readers skip it. The shapes live in src/data/state-outlines.ts.
+ *
+ * `corner` pins it to the top-right corner of the nearest positioned parent
+ * (the parent needs `position: relative`).
+ *
+ * Colors can be changed from the outside by setting --outline-stroke and
+ * --outline-fill on a parent element.
+ */
+import { OUTLINE_SIZE, stateOutlines } from '../../data/state-outlines';
+
+interface Props {
+  /** Two-letter state code, like "MO". */
+  id: string;
+  corner?: boolean;
+}
+
+const { id, corner = false } = Astro.props;
+const path = stateOutlines[id];
+---
+
+{
+  path && (
+    <svg
+      class:list={['state-outline', { corner }]}
+      viewBox={`0 0 ${OUTLINE_SIZE} ${OUTLINE_SIZE}`}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={path} />
+    </svg>
+  )
+}
+
+<style>
+  .state-outline {
+    flex: none;
+    width: 38px;
+    height: 38px;
+  }
+  .corner {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  path {
+    fill: var(--outline-fill, rgba(33, 73, 53, 0.07));
+    stroke: var(--outline-stroke, var(--green));
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+</style>

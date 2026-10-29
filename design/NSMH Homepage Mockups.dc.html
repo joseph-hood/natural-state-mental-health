@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><style>body{margin:0;background:#ECEAE4;font-family:system-ui,sans-serif}a{color:#1E4D2E}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08)}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.6)}.dv-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}</style></helmet>
+<section class="dv-turn" id="t4">
+<div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Homepage — cream (selected)</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="4a"><div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a>Desktop · cream</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" bg="cream" hint-size="1440px,7000px"></dc-import></div></div>
+<div class="dv-opt" id="4b"><div class="dv-olabel"><a class="dv-oid" href="#4b">4b</a>Mobile · cream</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" bg="cream" mobile="{{ true }}" hint-size="390px,12000px"></dc-import></div></div>
+</div>
+<p class="dv-next">Next: pick an "It's About Time" treatment (<a class="dv-oid" href="#3a">3a</a> / <a class="dv-oid" href="#3b">3b</a> / <a class="dv-oid" href="#3c">3c</a>), then inner pages.</p>
+</section>
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">“It's About Time” — cards vs map vs ledger</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="3a"><div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Cards + Arkansas “2027” card</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" only="abouttime" bg="cream" about-time="cards" hint-size="1440px,700px"></dc-import></div></div>
+<div class="dv-opt" id="3b"><div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a>Tile map, hover a row to highlight the state</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" only="abouttime" bg="cream" about-time="map" hint-size="1440px,800px"></dc-import></div></div>
+<div class="dv-opt" id="3c"><div class="dv-olabel"><a class="dv-oid" href="#3c">3c</a>Ledger, ending on Arkansas “Not yet.”</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" only="abouttime" bg="cream" about-time="ledger" hint-size="1440px,900px"></dc-import></div></div>
+<div class="dv-opt" id="3d"><div class="dv-olabel"><a class="dv-oid" href="#3d">3d</a>Map on mobile</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" only="abouttime" bg="cream" about-time="map" mobile="{{ true }}" hint-size="390px,1300px"></dc-import></div></div>
+</div>
+<p class="dv-next">Try next: "use <a class="dv-oid" href="#3b">3b</a> in the homepage" · "combine the map from <a class="dv-oid" href="#3b">3b</a> with the ledger rows from <a class="dv-oid" href="#3c">3c</a>"</p>
+</section>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Homepage with real logo, headshots, photo &amp; copy</span></div>
+<p style="margin:0 0 24px;max-width:760px;font:13px/1.55 system-ui,sans-serif;color:rgba(0,0,0,.65)">Primary green sampled from the logo: <code>#214935</code>. Headshots are only ~193px wide, so they'll look soft at card size; please send originals. Blake's "why" line got cut off. Bill specifics are marked as drafts.</p>
+<div class="dv-opts">
+<div class="dv-opt" id="2a"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Desktop · white</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" bg="white" hint-size="1440px,7000px"></dc-import></div></div>
+<div class="dv-opt" id="2b"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Desktop · cream</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" bg="cream" hint-size="1440px,7000px"></dc-import></div></div>
+<div class="dv-opt" id="2c"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Mobile · white</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" bg="white" mobile="{{ true }}" hint-size="390px,12000px"></dc-import></div></div>
+<div class="dv-opt" id="2d"><div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Mobile · cream</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" bg="cream" mobile="{{ true }}" hint-size="390px,12000px"></dc-import></div></div>
+</div>
+<p class="dv-next">Try next: "go with white and design the inner pages" · "bigger logo in the header"</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Homepage — white vs cream, desktop + mobile</span></div>
+<p style="margin:0 0 24px;max-width:760px;font:13px/1.55 system-ui,sans-serif;color:rgba(0,0,0,.65)">Assumptions: logo, headshots and photos are labeled placeholders (none were uploaded). Forest green is approximated as <code>#1E4D2E</code> — will match the logo file exactly once received. Board “why” lines, bill details, blog posts and poll sources are placeholder copy. One responsive component powers all four artboards.</p>
+<div class="dv-opts">
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Desktop · white</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" bg="white" hint-size="1440px,7000px"></dc-import></div></div>
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Desktop · cream</div><div class="dv-card" style="width:1440px"><dc-import name="Homepage" bg="cream" hint-size="1440px,7000px"></dc-import></div></div>
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Mobile · white</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" bg="white" mobile="{{ true }}" hint-size="390px,12000px"></dc-import></div></div>
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Mobile · cream</div><div class="dv-card" style="width:390px"><dc-import name="Homepage" bg="cream" mobile="{{ true }}" hint-size="390px,12000px"></dc-import></div></div>
+</div>
+<p class="dv-next">Try next: "go with <a class="dv-oid" href="#1b">1b</a> and design the inner pages" · "try a map for It's About Time" · "here's the logo and headshots"</p>
+</section>
+</x-dc>
+</body>
+</html>

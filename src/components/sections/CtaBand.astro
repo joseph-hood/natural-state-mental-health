@@ -1,0 +1,65 @@
+---
+/**
+ * CtaBand — a short "take action" banner with Donate and Join buttons.
+ * Reusable at the bottom of any page; text can be overridden.
+ */
+import { donateLink } from '../../data/nav';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Help us bring this to the 2027 session.',
+  text = 'Add your name to the coalition, or chip in to keep this work going.',
+} = Astro.props;
+---
+
+<Section tone="tint" labelledby="cta-heading">
+  <div class="band">
+    <div class="copy">
+      <h2 id="cta-heading">{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="actions">
+      <Button href={donateLink.href}>{donateLink.label}</Button>
+      <Button href="/join" variant="outline">Join the Coalition</Button>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .band {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px 48px;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 640px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(28px, 2.8vw, 38px);
+    line-height: 1.15;
+    color: var(--green-deep);
+    text-wrap: balance;
+  }
+  p {
+    font-size: 18px;
+    color: var(--text);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

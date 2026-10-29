@@ -1,0 +1,54 @@
+---
+/** "The people behind this" — grid of board member cards. Used on the home page. */
+import { board } from '../../data/board';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import ArrowLink from '../ui/ArrowLink.astro';
+import BoardCard from '../cards/BoardCard.astro';
+---
+
+<Section tone="tint" labelledby="board-heading">
+  <div class="stack">
+    <div class="head">
+      <SectionHeading
+        id="board-heading"
+        eyebrow="Our board"
+        title="The people behind this."
+        maxWidth="680px"
+      >
+        <p>Physicians, clinicians, scientists, and public servants from across Arkansas.</p>
+      </SectionHeading>
+      <ArrowLink href="/about#board">Meet the full board</ArrowLink>
+    </div>
+
+    <ul class="grid" role="list">
+      {
+        board.map((member) => (
+          <li>
+            <BoardCard member={member} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 20px;
+  }
+</style>
