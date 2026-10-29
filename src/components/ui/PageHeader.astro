@@ -1,0 +1,58 @@
+---
+/**
+ * PageHeader — the opening block of an inner page: small label, big title, intro.
+ * Renders the page's one <h1>. Anything placed inside becomes the intro text.
+ *
+ *   <PageHeader eyebrow="Blog" title="News, research, and stories.">
+ *     <p>Updates on the 2027 legislation.</p>
+ *   </PageHeader>
+ */
+interface Props {
+  title: string;
+  eyebrow?: string;
+}
+
+const { title, eyebrow } = Astro.props;
+---
+
+<header class="page-header">
+  <div class="container">
+    <div class="inner">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <div class="lead"><slot /></div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .page-header {
+    padding-top: clamp(48px, 6vw, 96px);
+    padding-bottom: clamp(32px, 4vw, 56px);
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 820px;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(40px, 4.6vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--green-deep);
+    text-wrap: balance;
+  }
+  .lead :global(p) {
+    max-width: 40em;
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.55;
+    color: var(--text);
+    text-wrap: pretty;
+  }
+  .lead:empty {
+    display: none;
+  }
+</style>

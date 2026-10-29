@@ -1,17 +1,20 @@
-"""Check that every link, image, font, and stylesheet inside site/ points to a real file.
+"""Check that every link, image, font, and stylesheet in the built site points to a real file.
 
+    npm run build
     python3 tools/check-site.py
 
-Looks at href, src and srcset in every HTML page, and url(...) in CSS. Links to other
-websites are not checked. Exits with an error listing anything broken, so the GitHub
-workflow stops before publishing a broken site.
+Looks at href, src and srcset in every HTML page in dist/, and url(...) in CSS. Links to
+other websites are not checked. Exits with an error listing anything broken, so the
+GitHub workflow stops before publishing a broken site.
 """
 import pathlib
 import re
 import sys
 from urllib.parse import unquote, urlsplit
 
-site = pathlib.Path(__file__).resolve().parent.parent / "site"
+site = pathlib.Path(__file__).resolve().parent.parent / "dist"
+if not (site / "index.html").is_file():
+    sys.exit("No built site in dist/. Run `npm run build` first.")
 
 ATTR = re.compile(r'\b(href|src|srcset)="([^"]*)"')
 CSS_URL = re.compile(r"url\(\s*['\"]?([^'\")]+)['\"]?\s*\)")

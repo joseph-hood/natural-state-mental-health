@@ -1,61 +1,56 @@
 # Natural State Mental Health website — notes for Claude
 
-Source for the Natural State Mental Health website (domain: naturalstatemh.org), hosted on
-GitHub Pages (migrated from Cloudflare). The people maintaining this site are not developers.
-Explain in plain language, avoid jargon, and confirm before anything hard to undo.
+Source for https://naturalstatemh.org: an Astro site, hosted on GitHub Pages. Joseph and Troy both maintain it, and
+neither is a developer. Explain in plain language, avoid jargon, and confirm before anything hard to undo. README.md
+is the maintainers' guide (where things live, common edits, TODOs); keep it accurate when you change how things work.
 
 ## How the site works
 
-- Static HTML/CSS/JS in `site/`, no build step. Pushing to `main` deploys via
-  `.github/workflows/pages.yml` (GitHub Pages, ~1–2 min). Everything in `site/` is public.
-- The HTML is an Astro export from troyco-nerd/naturalstatemh-site: minified, few lines,
-  assets in `site/_astro/` with hashed names. For text edits, change only the words in place
-  and don't reformat the file. For structural changes, explain that the Astro project is the
-  better place (see README) before hand-editing.
-- Links start at the domain root (`/about`, `/_astro/...`), so the site only works served from
-  the top of a domain. Keep new links in the same style.
-- Brand (CSS variables in `site/_astro/Section.*.css`): `--green` #214935, `--green-deep`
-  #17311f, `--ink` #1a2620, `--text` #3f4f45, `--gold` #e0a93b, `--sand` #f2ead6, `--cream`
-  #faf6ec, `--mint` #dce6de. Fonts: Source Serif 4 (headings), Source Sans 3 (body), JetBrains
-  Mono (labels), all bundled in `_astro/`.
-- The site is indexable: `robots.txt`, `sitemap.xml`, and a `<link rel="canonical">` on each
-  page. Only `404.html` is `noindex`. Keep `sitemap.xml` in step with the pages.
-- The blog is hidden until there are real posts (no `/blog` pages or links). Don't re-add it
-  unless asked.
-- Cloudflare-only features don't exist on GitHub Pages: `_headers`, `_redirects`, Pages
-  Functions (`functions/`), and Workers. Don't add them; replace with static equivalents.
+- Astro project: pages in `src/pages/`, text and numbers in `src/data/`, site settings in `src/config/site.ts`,
+  styles in `src/styles/global.css`. Node 22+ (`.nvmrc`).
+- `npm run dev` (live preview at http://localhost:4321), `npm run build` (writes `dist/`), `npm run preview`,
+  `npm run check`.
+- `.github/workflows/pages.yml` runs `npm ci`, `npm run check`, `npm run build`, and `tools/check-site.py` on every
+  PR, and on push to `main` also publishes `dist/` to GitHub Pages (~1–2 min). Everything in `dist/` is public.
+- Switches in `src/config/site.ts`: `noindex` (false: site is launched; 404 is always noindex via the BaseLayout
+  prop) and `showBlog` (false: blog hidden). Turning the blog on also needs `src/pages/_blog/` renamed to
+  `src/pages/blog/`. Don't change either unless asked.
+- Sitemap comes from `@astrojs/sitemap` (`sitemap-index.xml`); `public/robots.txt` points to it.
+- Brand: `:root` in `src/styles/global.css` (`--green` #214935, `--green-deep` #17311f, `--gold` #e0a93b, `--sand`
+  #f2ead6, `--cream` #faf6ec, ...). Fonts: Source Serif 4 (headings), Source Sans 3 (body), JetBrains Mono (labels),
+  self-hosted via npm.
+- Served from the domain root, so links start with `/`. Don't set `base` in `astro.config.mjs`.
+- The site moved off Cloudflare. Don't add Cloudflare-only things (`wrangler`, `_headers`, `_redirects`,
+  `functions/`, Workers); use static equivalents.
 
 ## Checking changes
 
-- `python3 tools/check-site.py` checks every internal link and asset (CI runs it on PRs and
-  before deploying).
-- Local preview: `python3 tools/serve.py` (Windows: `python`, since `python3` there is often a
-  Store stub). Serves on http://localhost:8000 with the custom 404. Check phone width too, and
-  look for console errors.
+`npm run check`, `npm run build`, then `python3 tools/check-site.py` (broken links in `dist/`). Look at the page
+with `npm run dev` at desktop and phone width, and check for console errors.
 
-**Live preview for the maintainer.** When a session changes anything under `site/`, publish a
-preview as an Artifact before opening the PR:
+**Live preview for the maintainer.** When a session changes anything that affects the built site, publish a preview
+as an Artifact before opening the PR:
 
-1. `python3 tools/build-preview.py <scratchpad>/preview` (it prints the supporting files; it
+1. `npm run build`, then `python3 tools/build-preview.py <scratchpad>/preview` (prints the supporting files; it
    renames `_astro/` to `astro/` in the copy because the Artifact host rejects `_` paths).
-2. Publish `<scratchpad>/preview/index.html` with the Artifact tool, `root` set to
-   `<scratchpad>/preview` and every printed path in `files`.
-3. After each further change in the same session, rebuild and republish the same file path so
-   the link stays the same. Put the preview link in your reply.
+2. Publish `<scratchpad>/preview/index.html` with the Artifact tool, `root` set to `<scratchpad>/preview` and every
+   printed path in `files`.
+3. After each further change in the same session, rebuild and republish the same file path so the link stays the
+   same. Put the preview link in your reply.
 
 If the session has no Artifact tool, send screenshots at desktop and phone width instead.
 
 ## Workflow
 
-- Never push directly to `main`. Branch → commit → push → PR with a short plain-language summary.
-  Merging the PR publishes the site.
+- Never push directly to `main`. Branch → commit → push → PR with a short plain-language summary. Merging the PR
+  publishes the site.
 - One small PR per request.
 - Don't commit secrets, API keys, or private contact details. The repo is public.
 
 ## Content guidelines
 
-This is a mental health site. Don't present copy as medical advice, keep crisis resources (e.g.
-988 Suicide & Crisis Lifeline) accurate and prominent, and don't invent clinical claims,
-credentials, or services. Facts about providers and partners come from them or their official
-sites. The site advocates for psilocybin-therapy legislation in Arkansas; don't overstate
-research findings or the bill's status.
+This is a mental health site. Don't present copy as medical advice, keep crisis resources (e.g. 988 Suicide & Crisis
+Lifeline) accurate and prominent, and don't invent clinical claims, credentials, or services. Facts about providers
+and partners come from them or their official sites. The site advocates for psilocybin-therapy legislation in
+Arkansas; don't overstate research findings or the bill's status. Get the client's approval before changing the
+Statement of Purpose (`src/pages/about.astro`).

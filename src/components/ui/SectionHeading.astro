@@ -1,0 +1,62 @@
+---
+/**
+ * SectionHeading — the small label + big serif heading + optional intro text
+ * that opens most sections.
+ *
+ *   <SectionHeading id="board-heading" eyebrow="Our board" title="The people behind this.">
+ *     <p>Physicians, clinicians, scientists, and public servants.</p>
+ *   </SectionHeading>
+ *
+ * Anything placed inside (the slot) appears below the heading as intro text.
+ * Use level={1} only for the one main heading on a page.
+ */
+interface Props {
+  title: string;
+  eyebrow?: string;
+  id?: string;
+  level?: 1 | 2;
+  tone?: 'light' | 'dark';
+  /** Limits how wide the text block can grow, e.g. "720px". */
+  maxWidth?: string;
+}
+
+const { title, eyebrow, id, level = 2, tone = 'light', maxWidth } = Astro.props;
+const Heading = level === 1 ? 'h1' : 'h2';
+---
+
+<div class:list={['section-heading', tone]} style={maxWidth ? `max-width:${maxWidth}` : undefined}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <Heading id={id} class="h2">{title}</Heading>
+  <div class="intro"><slot /></div>
+</div>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .h2 {
+    text-wrap: balance;
+  }
+  /* Intro paragraphs: 18–19px, softer colour */
+  .intro :global(p) {
+    font-size: 18px;
+    color: var(--text);
+    text-wrap: pretty;
+  }
+  .intro:empty {
+    display: none;
+  }
+
+  /* On dark green backgrounds */
+  .dark .eyebrow {
+    color: var(--gold-light);
+  }
+  .dark .h2 {
+    color: #fff;
+  }
+  .dark .intro :global(p) {
+    color: var(--mint);
+  }
+</style>

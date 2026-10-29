@@ -1,0 +1,71 @@
+---
+/**
+ * "Join the coalition" — who we're looking for, beside a sign-on card.
+ * The card sends people to /join, where the Google Form lives.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import RoleChips from '../ui/RoleChips.astro';
+import Button from '../ui/Button.astro';
+---
+
+<Section labelledby="coalition-heading">
+  <div class="grid">
+    <div class="copy">
+      <SectionHeading
+        id="coalition-heading"
+        eyebrow="Join the coalition"
+        title="Add your name. Add your voice."
+      >
+        <p>
+          We're looking for concerned individuals and groups to review our initiatives, call their
+          representatives, and sign on as official coalition members.
+        </p>
+      </SectionHeading>
+
+      <RoleChips />
+    </div>
+
+    <div class="signup">
+      <h3 class="title">Sign on as a member</h3>
+      <p>Fill out a short form to add your name to the coalition.</p>
+      <Button href="/join" variant="solid" block>Join the Coalition</Button>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: clamp(36px, 5vw, 72px);
+    align-items: start;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .signup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(22px, 3vw, 36px);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(20, 54, 33, 0.07);
+  }
+  .title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--green-deep);
+  }
+  .signup p {
+    font-size: 17px;
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+/** Blog index — lists every published post, newest first. Address: /blog */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/ui/PageHeader.astro';
+import Section from '../../components/ui/Section.astro';
+import PostCard from '../../components/cards/PostCard.astro';
+import AlertSignupSection from '../../components/sections/AlertSignupSection.astro';
+import { getPublishedPosts } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout
+  title="Blog"
+  description="News on the 2027 legislation, plain-language research summaries, and stories from Arkansans."
+>
+  <PageHeader eyebrow="Blog" title="News, research, and stories.">
+    <p>Updates on the 2027 legislation, plain-language research summaries, and stories from Arkansans.</p>
+  </PageHeader>
+
+  <Section padTop={false} labelledby="all-posts-heading">
+    <h2 id="all-posts-heading" class="sr-only">All posts</h2>
+    {
+      posts.length > 0 ? (
+        <ul class="grid" role="list">
+          {posts.map((post) => (
+            <li>
+              <PostCard {post} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">No posts yet. Check back soon.</p>
+      )
+    }
+  </Section>
+
+  <AlertSignupSection />
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 40px 28px;
+  }
+  .empty {
+    font-size: 18px;
+    color: var(--text);
+  }
+</style>

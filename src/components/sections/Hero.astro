@@ -1,0 +1,141 @@
+---
+/** Home page hero: headline, call-to-action buttons and the river-bridge photo. */
+import { Picture } from 'astro:assets';
+import Landmark from '@lucide/astro/icons/landmark';
+import bridge from '../../assets/arkansas-river-bridge.jpg';
+import { donateLink } from '../../data/nav';
+import Button from '../ui/Button.astro';
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="container grid">
+    <div class="copy">
+      <p class="eyebrow tag">
+        <span class="diamond" aria-hidden="true"></span>Arkansas · 2027 Legislative Session
+      </p>
+      <h1 id="hero-heading">Advancing Psilocybin Legislation in Arkansas.</h1>
+      <p class="lead">
+        We're a group of concerned Arkansans working to pass legislation in 2027 that gives Arkansans access to
+        therapeutic psilocybin.
+      </p>
+      <div class="actions">
+        <Button href={donateLink.href}>{donateLink.label}</Button>
+        <Button href="/join" variant="outline">Join the Coalition</Button>
+      </div>
+    </div>
+
+    <div class="visual">
+      <!-- Astro resizes this one big photo into several smaller AVIF/WebP files at build time. -->
+      <Picture
+        src={bridge}
+        alt="Bridge over the Arkansas River in Little Rock"
+        formats={['avif', 'webp']}
+        width={1200}
+        widths={[480, 720, 960, 1200]}
+        sizes="(min-width: 1000px) 584px, calc(100vw - 40px)"
+        loading="eager"
+        fetchpriority="high"
+        class="photo"
+      />
+      <div class="badge">
+        <span class="badge-icon"><Landmark size={18} /></span>
+        <p><strong>Physician-led.</strong> Research-backed. Built for Arkansas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(40px, 6vw, 96px);
+    padding-bottom: clamp(48px, 6vw, 96px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex: none;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(40px, 5.2vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--green-deep);
+    text-wrap: balance;
+  }
+  .lead {
+    max-width: 34em;
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.55;
+    color: var(--text);
+    text-wrap: pretty;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .visual {
+    position: relative;
+  }
+  .photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: 35% 50%;
+    border-radius: 10px;
+  }
+  .badge {
+    position: absolute;
+    left: clamp(-24px, -1.6vw, 0px);
+    bottom: -20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 290px;
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(20, 54, 33, 0.14);
+  }
+  .badge-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+  }
+  .badge p {
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+</style>

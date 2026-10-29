@@ -1,103 +1,102 @@
-# Natural State Mental Health website
+# Natural State Mental Health — website
 
-The website for Natural State Mental Health (https://naturalstatemh.org), published by GitHub
-Pages. Everything public lives in `site/`, and everything in `site/` is public.
+Website for [naturalstatemh.org](https://naturalstatemh.org), built with [Astro](https://astro.build) and
+hosted on [GitHub Pages](https://docs.github.com/en/pages). Joseph and Troy both work on it here.
 
 ## How a change goes live
 
-1. Edit a file on a branch (in the browser, github.dev with `.`, or Claude Code at claude.ai/code).
-2. Open a pull request into `main`. GitHub checks the site for broken links. A red ✗ on the
-   pull request means something points to a file that doesn't exist; click **Details** to see
-   which one.
-3. Merge it. The **Deploy site to GitHub Pages** workflow checks the site again, then publishes
-   `site/` in about 1–2 minutes (the Actions tab shows a green check when it's done).
+1. Make the change on a branch (on your computer, in github.dev with `.`, or with Claude Code at claude.ai/code).
+2. Open a pull request into `main`. GitHub builds the site and checks it for mistakes and broken links. A red ✗
+   on the pull request means something needs fixing; click **Details** to see what.
+3. Merge it. GitHub builds the site again and publishes it in about 1–2 minutes (the **Actions** tab shows a green
+   check when it's done).
 
 If something goes wrong, open the merged PR, click **Revert**, and merge the revert PR.
+More detail, including the one-time GitHub and domain setup, is in [docs/DEPLOY.md](docs/DEPLOY.md).
 
-## Preview on your computer
+## Run it on your computer
 
-You need Python 3 (https://www.python.org/downloads/). From this folder, run:
+You need [Node.js](https://nodejs.org) version 22 or newer.
 
-```sh
-python3 tools/serve.py        # Mac / Linux
-python tools/serve.py         # Windows
+```bash
+npm install        # one time: downloads the tools this project uses
+npm run dev        # starts the site at http://localhost:4321 (updates as you edit files)
 ```
 
-Your browser opens http://localhost:8000. It behaves like the live site, including the "page
-not found" page. Press Ctrl+C in the terminal to stop it.
+| Command           | What it does                                                     |
+| ----------------- | ---------------------------------------------------------------- |
+| `npm run dev`     | Local preview that refreshes as you edit                         |
+| `npm run build`   | Creates the finished site in the `dist/` folder                  |
+| `npm run preview` | Serves the finished `dist/` folder locally (what visitors get)   |
+| `npm run check`   | Looks for mistakes in the code                                   |
 
-To check for broken links yourself (GitHub also does this on every pull request):
+To check for broken links yourself (GitHub also does this on every pull request), build first and then run
+`python3 tools/check-site.py` (on Windows: `python tools/check-site.py`).
 
-```sh
-python3 tools/check-site.py   # on Windows: python tools/check-site.py
+## Where things live
+
+```
+src/
+  pages/              One file per page. index.astro = home page, 404.astro = "not found".
+    _blog/            The blog pages, switched off for now (see "Site switches")
+  layouts/            BaseLayout.astro: the <head>, header, footer wrapped around every page.
+  components/
+    layout/           Header, Footer, announcement bar, logo lockup
+    ui/               Small reusable pieces: Button, ArrowLink, Section, SectionHeading
+    cards/            StateCard, BoardCard, PostCard
+    forms/            Field, AlertSignupForm
+    sections/         Big page sections (Hero, Board, Bill, Coalition, ...)
+  data/               The text and numbers shown on the site (board, states, nav, bill points)
+  content/blog/       Blog posts: one Markdown (.md) file each
+  content.config.ts   The rules every blog post must follow (title, date, category, ...)
+  assets/             Images. Astro resizes and compresses these automatically at build time.
+  config/site.ts      Site-wide settings (email, search engine and blog switches, survey and Givebutter links)
+  styles/global.css   Colors, fonts and spacing used everywhere
+public/               Files copied as-is (favicons, robots.txt)
+design/               The approved design mockups. Reference only; not part of the website.
+docs/DEPLOY.md        How publishing works, and the one-time GitHub Pages and domain setup
+tools/                Helper scripts: broken-link check, Claude preview builder
+.github/workflows/    The GitHub automation that checks and publishes the site
+CLAUDE.md             Instructions every Claude session reads
 ```
 
-## Where the site came from
+## Site switches
 
-The pages were built with a tool called Astro in a separate repository,
-[troyco-nerd/naturalstatemh-site](https://github.com/troyco-nerd/naturalstatemh-site), and
-exported here as finished HTML on 2026-10-28. That's why the files are compressed onto very few
-lines and why the images and styles sit in `site/_astro/` with names like `logo.CcyFdOgV_1zaUQS.png`.
+Both live in `src/config/site.ts`.
 
-- **Small text fixes** can be made directly in the `.html` files here. Use your editor's search
-  to find the sentence, and change only the words.
-- **Bigger changes** (new pages, layout, new blog posts) are much easier in the original Astro
-  project. Make the change there, run `npm run build` (needs Node.js 22+), and copy the contents
-  of its `dist` folder over `site/` in a pull request. Before copying, check the export still
-  has the changes listed under "Search engines" and "Not on the site yet" below, or they'll
-  come back.
+- **`noindex`** (now `false`): when `true`, every page asks search engines not to list it. The "page not found"
+  page always does. Search engines find the pages through `sitemap-index.xml`, which is made automatically at build
+  time, and `public/robots.txt`.
+- **`showBlog`** (now `false`): the blog is hidden until there are real posts. That hides the Blog links, the home
+  page "Latest from the blog" section, and the "Read the research summary" link. To turn it on, set `showBlog: true`
+  **and** rename the folder `src/pages/_blog/` to `src/pages/blog/` (Astro skips folders whose names start with `_`).
+  Both steps are needed.
 
-## Setting up GitHub Pages (one time)
+## Common edits
 
-1. Repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Same page, **Custom domain**: enter `naturalstatemh.org`, save, and tick **Enforce HTTPS**
-   once it's offered. Then point the domain's DNS at GitHub, following
-   [GitHub's custom domain guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
-   This replaces the Cloudflare hosting.
+- **Change wording on a card/list** (board members, states, bill points, nav links): edit the matching file in `src/data/`.
+- **Add a blog post:** copy one of the files in `src/content/blog/`, rename it (the file name becomes the web address), and edit the text. To add a photo, put it in `src/assets/` and add `image:` and `imageAlt:` to the post's top block. Posts only appear once the blog is switched on (see above).
+- **Add a state to the "It's About Time" cards:** add it to `states` in `src/data/states.ts`, then run `node scripts/build-state-outlines.mjs` with every state code the site needs (the steps are at the top of that script) to draw its outline.
+- **Edit a board member's bio or add a member:** edit `src/data/board.ts`. `bio` holds the About page paragraphs (one entry per paragraph), `headline` is the line under the name, and `why` is the short quote on the home page card.
+- **Edit the Statement of Purpose:** it's written directly in `src/pages/about.astro`. Get the client's approval before changing the wording.
+- **Change the photos above the 72% / 55% numbers:** replace `src/assets/signing-ceremony.jpg` or `src/assets/listening-circle.jpg` with a new photo using the **same file name** (16:9 landscape works best). To change the photo's description for screen readers, edit `imageAlt` in `stats` in `src/data/states.ts`.
+- **Swap a board headshot:** replace the file in `src/assets/board/` with a larger photo using the **same file name**. The current headshots are only about 193px wide, so they look soft on cards.
+- **Change colors or fonts:** the `:root` block at the top of `src/styles/global.css`.
 
-The site has to be served from the top of a domain. Every link starts with `/` (for example
-`/_astro/...`), so the temporary `joseph-hood.github.io/natural-state-mental-health/` address
-shows the pages without styles or images. That's expected and goes away once the custom domain
-is connected.
+## Things marked TODO
 
-## Search engines
+Search the project for `TODO` to find every spot that needs a decision:
 
-The site is open to search engines. `site/robots.txt` allows crawling, and `site/sitemap.xml`
-lists every page. **When you add or remove a page, update `sitemap.xml` too.** Each page has a
-`<link rel="canonical">` naming its address on naturalstatemh.org, so Google treats that as the
-main address. Only `404.html` keeps `<meta name="robots" content="noindex">`.
-
-When re-exporting from the Astro project, make sure `noindex: false` is set in
-`src/config/site.ts`, then copy `robots.txt` and `sitemap.xml` back into `site/` if the export
-doesn't include them.
-
-## Not on the site yet
-
-- **Blog.** Hidden until there are real posts: removed from the menus and the home page, and
-  the sample posts deleted. They're still in the Astro project and in this repo's history.
-- **Legislative alerts form.** The email sign-up on the home page says "Alerts are coming soon"
-  and doesn't send anything yet.
+- **Join the Coalition** uses a Google Form. Its link is `coalitionFormUrl` in `src/config/site.ts`, and the `/join` page embeds it. Responses go to the Google account that owns the form. If the embedded form gets cut off or leaves a big gap, adjust the two `height` values at the bottom of `src/pages/join.astro`.
+- **Alerts sign-up form (`src/scripts/form-todo.ts`)**: looks and validates correctly, but **submissions are not connected**. Pressing the button shows a "coming soon" message and sends nothing. Decide where submissions should go (email, a CRM, a spreadsheet, ...) and replace the placeholder in that one file.
+- **Practitioner survey** uses a Google Form. Its link is `practitionerSurveyUrl` in `src/config/site.ts` (used by the top banner and the footer).
+- **Privacy Policy page**: none exists yet, so the alerts form's text-message notice has no "See our Privacy Policy" link. When a policy is published, restore the link (instructions are in the comment at the top of `src/components/forms/AlertSignupForm.astro`). Text-message sign-ups normally require one.
+- **"Read the research summary" link** on the home page points at the research blog post for now, so it's hidden along with the blog.
+- **Blog posts** are placeholders. Replace them with real posts before switching the blog on.
 
 ## Outside services the site uses
 
-- **Google Forms**: the "Join the Coalition" form (shown inside `/join/`) and the practitioner
-  survey.
+- **Google Forms**: the "Join the Coalition" form (shown inside `/join/`) and the practitioner survey.
 - **Givebutter**: every Donate button opens https://givebutter.com/naturalstatemh.
 
-Fonts and images are all included in `site/`. Nothing else is loaded from other websites.
-
-## Layout
-
-```text
-.github/workflows/pages.yml   checks pull requests; checks and publishes site/ on merge to main
-CLAUDE.md                     instructions every Claude session reads
-tools/serve.py                local preview
-tools/check-site.py           broken-link check (also run by GitHub)
-tools/build-preview.py        builds an Artifact preview of the site for Claude
-site/                         the published site
-  index.html                  home page
-  about/  join/               the other pages (each is a folder with an index.html)
-  404.html                    "page not found"
-  robots.txt  sitemap.xml     for search engines
-  _astro/                     styles, fonts, and images
-```
+Fonts are installed from npm and served with the site, so visitors' browsers never contact Google Fonts.
