@@ -1,12 +1,13 @@
 ---
-/** Shown for any address that doesn't exist. Cloudflare serves this via wrangler.jsonc. */
+/** Shown for any address that doesn't exist. GitHub Pages serves this automatically. */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/ui/Section.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import Button from '../components/ui/Button.astro';
+import { SITE } from '../config/site';
 ---
 
-<BaseLayout title="Page not found" announcement={false}>
+<BaseLayout title="Page not found" announcement={false} noindex>
   <Section labelledby="not-found-heading">
     <div class="wrap">
       <SectionHeading
@@ -20,7 +21,7 @@ import Button from '../components/ui/Button.astro';
       </SectionHeading>
       <div class="actions">
         <Button href="/">Go to the home page</Button>
-        <Button href="/blog" variant="outline">Read the blog</Button>
+        {SITE.showBlog && <Button href="/blog" variant="outline">Read the blog</Button>}
       </div>
     </div>
   </Section>

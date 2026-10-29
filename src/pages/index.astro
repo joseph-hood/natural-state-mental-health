@@ -11,6 +11,7 @@ import CoalitionSection from '../components/sections/CoalitionSection.astro';
 import LatestPostsSection from '../components/sections/LatestPostsSection.astro';
 import AlertSignupSection from '../components/sections/AlertSignupSection.astro';
 import { getPublishedPosts } from '../utils/posts';
+import { SITE } from '../config/site';
 
 const latestPosts = (await getPublishedPosts()).slice(0, 3);
 ---
@@ -23,6 +24,6 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
   <BoardSection />
   <BillSection />
   <CoalitionSection />
-  <LatestPostsSection posts={latestPosts} />
+  {SITE.showBlog && <LatestPostsSection posts={latestPosts} />}
   <AlertSignupSection />
 </BaseLayout>

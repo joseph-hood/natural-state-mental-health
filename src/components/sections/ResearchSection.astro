@@ -1,5 +1,6 @@
 ---
 /** "What the research shows" — intro text beside a numbered grid of conditions. */
+import { SITE } from '../../config/site';
 import { conditions } from '../../data/states';
 import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
@@ -15,10 +16,15 @@ import ArrowLink from '../ui/ArrowLink.astro';
           conditions that affect thousands of Arkansas families.
         </p>
       </SectionHeading>
-      <!-- TODO: point this at the real research summary once it exists. For now it goes to the research post. -->
-      <ArrowLink href="/blog/what-the-research-says-about-psilocybin-and-ptsd">
-        Read the research summary
-      </ArrowLink>
+      <!-- TODO: point this at the real research summary once it exists. For now it goes to the
+           research post, so it's hidden while the blog is (SITE.showBlog). -->
+      {
+        SITE.showBlog && (
+          <ArrowLink href="/blog/what-the-research-says-about-psilocybin-and-ptsd">
+            Read the research summary
+          </ArrowLink>
+        )
+      }
     </div>
 
     <ol class="conditions" role="list">

@@ -1,82 +1,50 @@
-# Deploying to Cloudflare Workers (beginner guide)
+# Publishing the site (GitHub Pages)
 
-## What "deploying" means here
+## What happens when you merge
 
-1. **Build.** `npm run build` turns the project into a folder of plain web files called `dist/`.
-2. **Upload.** Cloudflare stores those files on its servers around the world and hands them to visitors.
+GitHub does everything itself. The steps are in [`.github/workflows/pages.yml`](../.github/workflows/pages.yml):
 
-There is no server code to maintain. The settings that tell Cloudflare what to upload live in
-[`wrangler.jsonc`](../wrangler.jsonc). (Wrangler is Cloudflare's command-line tool.)
+1. **Install** the tools the project uses (`npm ci`).
+2. **Check** the code for mistakes (`npm run check`).
+3. **Build** the site into a folder of plain web files called `dist/` (`npm run build`).
+4. **Check for broken links** in `dist/` (`tools/check-site.py`).
+5. **Publish** `dist/` to GitHub Pages, at https://naturalstatemh.org.
 
-You need a free Cloudflare account: <https://dash.cloudflare.com/sign-up>
+On a pull request, steps 1–4 run and nothing is published, so mistakes show up as a red ✗ before anything goes
+live. On a merge into `main`, all five run. If any step fails, nothing is published and the live site stays as it was.
 
----
+You can watch it in the repository's **Actions** tab. To publish again without a change (for example after fixing a
+setting), open **Actions → Deploy site to GitHub Pages → Run workflow**.
 
-## Option A (recommended): connect GitHub, deploy automatically
+## Rolling back
 
-Cloudflare watches the GitHub repository. Every time new code is saved ("pushed"), it builds and publishes
-the site by itself. You never need to run commands.
+Open the merged pull request, click **Revert**, and merge the revert PR. GitHub rebuilds and publishes the earlier
+version.
 
-1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com).
-2. Go to **Workers & Pages**, choose **Create application**, then next to **Import a repository** choose **Get started**.
-3. Connect your GitHub account if asked, then pick the repository **`troyco-nerd/naturalstatemh-site`**.
-4. Fill in the project settings:
+## Working together
 
-   | Setting            | Value                                                                    |
-   | ------------------ | ------------------------------------------------------------------------ |
-   | Project/Worker name | `naturalstatemh-site` — **must match** `name` in `wrangler.jsonc` or the build fails |
-   | Production branch  | `main` (see the note below)                                               |
-   | Build command      | `npm run build`                                                           |
-   | Deploy command     | `npx wrangler deploy`                                                     |
-   | Root directory     | leave as `/`                                                              |
+Joseph and Troy both work in this repository. Neither of you pushes straight to `main`: make a branch, open a pull
+request, and merge it once the checks are green. If you both edit the same lines at once, GitHub asks whoever merges
+second to pick which version to keep.
 
-5. Click **Save and Deploy**. After a minute or two Cloudflare shows the live address, which looks like
-   `https://naturalstatemh-site.<your-account-name>.workers.dev`. Send that link to the client.
+## One-time setup (already done for naturalstatemh.org)
 
-> **Which branch goes live?** Work is currently saved on the branch `claude/gracious-gauss-enw98a`, not `main`.
-> Cloudflare publishes the **production branch** to the main address, and gives other branches a separate
-> temporary "Preview" address. So either merge this branch into `main` first, or choose it as the production branch
-> in step 4. Dashboard wording changes from time to time; if a label differs, look for the closest match or see
-> Cloudflare's guide: <https://developers.cloudflare.com/workers/ci-cd/builds/>
+Kept here in case it ever needs redoing.
 
-**If the build fails** with a message about the Node version, open the Worker's **Settings → Build** and add a
-variable named `NODE_VERSION` with value `22`. (This project needs Node 22 or newer.)
+1. **Turn on Pages:** repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. **Custom domain:** on the same page, enter `naturalstatemh.org` and save. Tick **Enforce HTTPS** once GitHub offers it.
+3. **DNS** (at Squarespace Domains: **Domains → naturalstatemh.org → DNS → DNS Settings**):
 
----
+   | Type  | Host | Value                                                                      |
+   | ----- | ---- | -------------------------------------------------------------------------- |
+   | A     | @    | 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 (one record each) |
+   | AAAA  | @    | 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153 (one record each) |
+   | CNAME | www  | joseph-hood.github.io                                                       |
 
-## Option B: deploy by hand from your own computer
+   **Don't touch** the `MX` record (`smtp.google.com`) or the `TXT` record starting `v=spf1`. Those run the
+   domain's Google Workspace email.
 
-Useful for a quick one-off upload.
+The site must be served from the top of a domain, because every link starts with `/`. That's why the
+`joseph-hood.github.io/natural-state-mental-health/` address shows pages without styles.
 
-```bash
-npm install            # first time only
-npx wrangler login     # opens a browser tab; click "Allow" to connect your Cloudflare account
-npm run deploy         # builds the site, then uploads it
-```
-
-The first time, Wrangler may ask you to pick a free `workers.dev` name. When it finishes it prints the live address.
-
-**Can't use `wrangler login`** (for example on a Chromebook or a remote machine where the browser can't call back)?
-Create an API token instead: in the dashboard go to **My Profile → API Tokens → Create Token**, use the
-**Edit Cloudflare Workers** template, then run:
-
-```bash
-export CLOUDFLARE_API_TOKEN="paste-the-token-here"   # keep this secret; never save it in the project
-npm run deploy
-```
-
----
-
-## Using the real domain (naturalstatemh.org) later
-
-1. The domain's DNS must be managed by Cloudflare (add the domain under **Websites** in the dashboard if it isn't).
-2. Open the Worker, then **Settings → Domains & Routes → Add → Custom Domain**, and enter `naturalstatemh.org`.
-3. Do this only when the site is ready to be public, and then **turn off the preview block**:
-   in `src/config/site.ts` set `noindex: false`. While it is `true`, every page carries
-   `<meta name="robots" content="noindex">` and search engines will not list the site.
-
-## Quick checks
-
-- **See exactly what would be uploaded, without uploading:** `npx wrangler deploy --dry-run`
-- **View the finished site locally:** `npm run build && npm run preview`
-- **Roll back a bad update:** in the dashboard open the Worker's **Deployments / Version History** and redeploy an earlier version.
+GitHub's guide: <https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site>

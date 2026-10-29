@@ -9,12 +9,22 @@ export const SITE = {
     "We're a group of concerned Arkansans working to pass legislation in 2027 that gives Arkansans access to therapeutic psilocybin.",
 
   /**
-   * CLIENT PREVIEW SWITCH.
+   * SEARCH ENGINE SWITCH.
    * While true, every page tells search engines not to index it
    * (<meta name="robots" content="noindex">, added in BaseLayout.astro).
-   * Set to false when the site is ready to launch.
+   * The site is launched, so this is false. The 404 page is always noindex.
    */
-  noindex: true,
+  noindex: false,
+
+  /**
+   * BLOG SWITCH.
+   * While false, the Blog links, the home page "Latest from the blog" section,
+   * and the "Read the research summary" link are hidden. The blog pages
+   * themselves are switched off by the folder name src/pages/_blog/ (Astro
+   * skips folders starting with "_"). To turn the blog on: set this to true
+   * AND rename src/pages/_blog/ back to src/pages/blog/.
+   */
+  showBlog: false,
 
   /**
    * The Google Form behind the "Take our practitioner survey" links (the top

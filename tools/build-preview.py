@@ -1,8 +1,9 @@
 """Build an Artifact-ready copy of the site for a live preview in Claude.
 
+    npm run build
     python3 tools/build-preview.py <output-dir>
 
-Copies site/ to <output-dir> and makes it work from the Artifact host:
+Copies the built site (dist/) to <output-dir> and makes it work from the Artifact host:
 - addresses that start at the top of the domain ("/about", "/_astro/x.css") become
   relative ones ("about/index.html", "astro/x.css"), in every page and stylesheet;
 - top-level folders starting with "_" lose the "_" (the Artifact host reserves those);
@@ -16,8 +17,10 @@ import re
 import shutil
 import sys
 
-site = pathlib.Path(__file__).resolve().parent.parent / "site"
+site = pathlib.Path(__file__).resolve().parent.parent / "dist"
 out = pathlib.Path(sys.argv[1]).resolve()
+if not (site / "index.html").is_file():
+    sys.exit("No built site in dist/. Run `npm run build` first.")
 
 ATTR = re.compile(r'\b(href|src|srcset)="([^"]*)"')
 CSS_URL = re.compile(r"url\(\s*(['\"]?)(/[^/'\")][^'\")]*)\1\s*\)")

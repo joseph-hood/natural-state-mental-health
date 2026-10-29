@@ -26,9 +26,12 @@ interface Props {
   description?: string;
   /** Show the practitioner-survey banner above the header. */
   announcement?: boolean;
+  /** Ask search engines not to list this page (always on while SITE.noindex is true). */
+  noindex?: boolean;
 }
 
 const { title, description = SITE.description, announcement = true } = Astro.props;
+const noindex = SITE.noindex || Astro.props.noindex;
 
 const pageTitle = title
   ? `${title} | ${SITE.name}`
@@ -43,14 +46,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!--
-      CLIENT PREVIEW: asks search engines not to list this site.
-      Controlled by `noindex` in src/config/site.ts — set it to false at launch.
+      Asks search engines not to list the page. Controlled by `noindex` in
+      src/config/site.ts (whole site) or the `noindex` prop (one page, e.g. 404).
     -->
-    {SITE.noindex && <meta name="robots" content="noindex" />}
+    {noindex && <meta name="robots" content="noindex" />}
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    {!SITE.noindex && <link rel="canonical" href={canonical} />}
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
