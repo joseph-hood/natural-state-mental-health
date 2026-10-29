@@ -18,8 +18,10 @@ Explain in plain language, avoid jargon, and confirm before anything hard to und
   #17311f, `--ink` #1a2620, `--text` #3f4f45, `--gold` #e0a93b, `--sand` #f2ead6, `--cream`
   #faf6ec, `--mint` #dce6de. Fonts: Source Serif 4 (headings), Source Sans 3 (body), JetBrains
   Mono (labels), all bundled in `_astro/`.
-- Every page has `<meta name="robots" content="noindex">` until launch. Don't remove it unless
-  asked.
+- The site is indexable: `robots.txt`, `sitemap.xml`, and a `<link rel="canonical">` on each
+  page. Only `404.html` is `noindex`. Keep `sitemap.xml` in step with the pages.
+- The blog is hidden until there are real posts (no `/blog` pages or links). Don't re-add it
+  unless asked.
 - Cloudflare-only features don't exist on GitHub Pages: `_headers`, `_redirects`, Pages
   Functions (`functions/`), and Workers. Don't add them; replace with static equivalents.
 

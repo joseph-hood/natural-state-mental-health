@@ -43,7 +43,9 @@ lines and why the images and styles sit in `site/_astro/` with names like `logo.
   to find the sentence, and change only the words.
 - **Bigger changes** (new pages, layout, new blog posts) are much easier in the original Astro
   project. Make the change there, run `npm run build` (needs Node.js 22+), and copy the contents
-  of its `dist` folder over `site/` in a pull request.
+  of its `dist` folder over `site/` in a pull request. Before copying, check the export still
+  has the changes listed under "Search engines" and "Not on the site yet" below, or they'll
+  come back.
 
 ## Setting up GitHub Pages (one time)
 
@@ -58,14 +60,23 @@ The site has to be served from the top of a domain. Every link starts with `/` (
 shows the pages without styles or images. That's expected and goes away once the custom domain
 is connected.
 
-## Before launch
+## Search engines
 
-- **Search engines.** Every page currently has `<meta name="robots" content="noindex">`, which
-  asks Google and others not to list the site. That was deliberate for the client preview. To
-  launch, remove that tag from every `.html` file in `site/` (or set `noindex: false` in
-  `src/config/site.ts` in the Astro project and re-export).
-- **Legislative alerts form.** The email sign-up on the home page and blog pages says "Alerts
-  are coming soon" and doesn't send anything yet.
+The site is open to search engines. `site/robots.txt` allows crawling, and `site/sitemap.xml`
+lists every page. **When you add or remove a page, update `sitemap.xml` too.** Each page has a
+`<link rel="canonical">` naming its address on naturalstatemh.org, so Google treats that as the
+main address. Only `404.html` keeps `<meta name="robots" content="noindex">`.
+
+When re-exporting from the Astro project, make sure `noindex: false` is set in
+`src/config/site.ts`, then copy `robots.txt` and `sitemap.xml` back into `site/` if the export
+doesn't include them.
+
+## Not on the site yet
+
+- **Blog.** Hidden until there are real posts: removed from the menus and the home page, and
+  the sample posts deleted. They're still in the Astro project and in this repo's history.
+- **Legislative alerts form.** The email sign-up on the home page says "Alerts are coming soon"
+  and doesn't send anything yet.
 
 ## Outside services the site uses
 
@@ -85,7 +96,8 @@ tools/check-site.py           broken-link check (also run by GitHub)
 tools/build-preview.py        builds an Artifact preview of the site for Claude
 site/                         the published site
   index.html                  home page
-  about/  join/  blog/        the other pages (each is a folder with an index.html)
+  about/  join/               the other pages (each is a folder with an index.html)
   404.html                    "page not found"
+  robots.txt  sitemap.xml     for search engines
   _astro/                     styles, fonts, and images
 ```
