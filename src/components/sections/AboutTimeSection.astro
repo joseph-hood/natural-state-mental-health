@@ -1,17 +1,12 @@
 ---
 /**
- * "It's About Time" — cards showing what other states have done, ending on
- * Arkansas's "2027" card and a pull quote.
- *
- * The design explored three versions (cards / tile map / ledger). This is the
- * "cards" version, which is what the approved homepage mockup uses.
+ * "It's About Time" — cards showing what other states have done,
+ * with official vote records and a pull quote.
  */
 import { states } from '../../data/states';
 import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
-import ArrowLink from '../ui/ArrowLink.astro';
 import StateCard from '../cards/StateCard.astro';
-import StateOutline from '../ui/StateOutline.astro';
 ---
 
 <Section tone="tint" labelledby="about-time-heading">
@@ -22,7 +17,10 @@ import StateOutline from '../ui/StateOutline.astro';
       title="It’s About Time."
       maxWidth="720px"
     >
-      <p>States like ours are already acting on psychedelic therapy, often with broad bipartisan support.</p>
+      <p>
+        States like ours are already acting on psychedelic therapy,
+        often with broad bipartisan support.
+      </p>
     </SectionHeading>
 
     <ul class="cards" role="list">
@@ -33,19 +31,16 @@ import StateOutline from '../ui/StateOutline.astro';
           </li>
         ))
       }
-      <li>
-        <article class="ark">
-          <StateOutline id="AR" corner />
-          <h3 class="name">Arkansas</h3>
-          <p class="big">2027</p>
-          <p class="note">Never attempted. Let's change that.</p>
-          <ArrowLink href="/join" class="join">Join the coalition</ArrowLink>
-        </article>
-      </li>
     </ul>
 
+    <p class="source-note">
+      Selected legislative votes, 2025–2026. House passage alone
+      does not mean a bill became law.
+    </p>
+
     <blockquote class="pull">
-      Other conservative, rural, veteran-heavy states are not sitting this out, and neither should we.
+      Other conservative, rural, veteran-heavy states are not
+      sitting this out, and neither should we.
     </blockquote>
   </div>
 </Section>
@@ -56,50 +51,17 @@ import StateOutline from '../ui/StateOutline.astro';
     flex-direction: column;
     gap: 40px;
   }
+
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
     gap: 16px;
   }
 
-  /* Arkansas's own card: warm background + dashed border to stand out */
-  .ark {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 100%;
-    padding: 24px;
-    background: var(--gold-wash);
-    border: 1.5px dashed var(--gold-dark);
-    border-radius: 10px;
-    --link-color: var(--green-deep);
-    /* Gold outline, to match the card. */
-    --outline-stroke: var(--gold-dark);
-    --outline-fill: rgba(224, 169, 59, 0.22);
-  }
-  .name {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green-deep);
-  }
-  .big {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 1.1;
-    color: var(--green-deep);
-  }
-  .note {
+  .source-note {
+    color: var(--text-subtle);
     font-size: 15px;
-    line-height: 1.45;
-    color: var(--text);
-  }
-  .ark :global(.join) {
-    margin-top: auto;
-    font-size: 15px;
+    margin-top: -20px;
   }
 
   .pull {
