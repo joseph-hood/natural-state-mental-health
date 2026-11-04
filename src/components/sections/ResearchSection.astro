@@ -1,7 +1,6 @@
 ---
 /** "What the research shows" — intro text beside a numbered grid of conditions. */
-import { SITE } from '../../config/site';
-import { conditions } from '../../data/states';
+import { researchTopics } from '../../data/research';
 import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import ArrowLink from '../ui/ArrowLink.astro';
@@ -12,29 +11,23 @@ import ArrowLink from '../ui/ArrowLink.astro';
     <div class="copy">
       <SectionHeading id="research-heading" eyebrow="The evidence" title="What the research shows.">
         <p>
-          Clinical trials at leading research institutions are studying psilocybin-assisted therapy for
-          conditions that affect thousands of Arkansas families.
+          Researchers are studying psilocybin and other psychedelic-assisted therapies for conditions
+          that affect Arkansas families. Explore the findings, the limits, and the work still underway.
         </p>
       </SectionHeading>
-      <!-- TODO: point this at the real research summary once it exists. For now it goes to the
-           research post, so it's hidden while the blog is (SITE.showBlog). -->
-      {
-        SITE.showBlog && (
-          <ArrowLink href="/blog/what-the-research-says-about-psilocybin-and-ptsd">
-            Read the research summary
-          </ArrowLink>
-        )
-      }
+      <ArrowLink href="/research/">Explore the research</ArrowLink>
     </div>
 
     <ol class="conditions" role="list">
       {
-        conditions.map((name, index) => (
-          <li class="cell">
+        researchTopics.map((topic, index) => (
+          <li>
+            <a class="cell" href={`/research/#${topic.id}`}>
             <span class="num" aria-hidden="true">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span class="name">{name}</span>
+            <span class="name">{topic.name}</span>
+            </a>
           </li>
         ))
       }
@@ -65,6 +58,8 @@ import ArrowLink from '../ui/ArrowLink.astro';
   .cell {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    text-decoration: none;
     gap: 6px;
     min-height: 92px;
     padding: 22px 20px;

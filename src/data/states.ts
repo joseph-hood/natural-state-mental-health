@@ -2,11 +2,7 @@ import type { ImageMetadata } from 'astro';
 import signingCeremony from '../assets/signing-ceremony.jpg';
 import listeningCircle from '../assets/listening-circle.jpg';
 
-/**
- * "It's About Time" — what other states have done.
- * Copy comes from the approved design. Double-check every figure with the
- * client before launch.
- */
+/** "It's About Time" — selected votes, checked against official records on 2026-11-03. */
 export interface StateAction {
   id: string;
   name: string;
@@ -108,14 +104,3 @@ export const statsSource = {
   },
   sample: 'n=1,577 U.S. voters',
 };
-
-export const conditions = [
-  'Depression',
-  'Anxiety',
-  'PTSD',
-  'Addiction',
-  'Eating Disorders',
-  'OCD',
-  'End-of-Life Anxiety',
-  'Traumatic Brain Injury',
-];

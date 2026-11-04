@@ -68,13 +68,17 @@ Both live in `src/config/site.ts`.
   page always does. Search engines find the pages through `sitemap-index.xml`, which is made automatically at build
   time, and `public/robots.txt`.
 - **`showBlog`** (now `false`): the blog is hidden until there are real posts. That hides the Blog links, the home
-  page "Latest from the blog" section, and the "Read the research summary" link. To turn it on, set `showBlog: true`
+  page "Latest from the blog" section. The Research page is independent of this switch. To turn the blog on, set `showBlog: true`
   **and** rename the folder `src/pages/_blog/` to `src/pages/blog/` (Astro skips folders whose names start with `_`).
   Both steps are needed.
 
 ## Common edits
 
 - **Change wording on a card/list** (board members, states, bill points, nav links): edit the matching file in `src/data/`.
+- **Update the research:** edit `src/data/research.ts`. Each topic has a permanent ID used by the homepage links, plus source citations, substance labels, study design, findings, and limitations. The page is `src/pages/research.astro` at `/research/`. Keep trial registrations separate from published results and do not imply findings for one drug apply to another.
+- **Update a state vote:** edit `src/data/states.ts`. Keep the bill number, session/year, chamber, vote stage, and official roll-call links together. A House vote is not evidence that a bill became law. The selected records were reviewed November 3, 2026.
+- **Legislator briefing:** `/legislators/` is a direct-link page for QR codes and individual sharing, with the October 2026 presentation. It is deliberately absent from navigation and the sitemap and has a `noindex` tag. It is publicly accessible to anyone with the address; it is not password-protected. Use `https://naturalstatemh.org/legislators/` as the QR destination after merging. Do not block it in `robots.txt`, because search crawlers must be able to see `noindex`.
+- **Replace slides / add the FAQs:** originals are in `src/assets/legislator-slides/`, their order and accessible text versions are in `src/data/legislator-slides.ts`, and the FAQ section is in `src/pages/legislators.astro`. The source ZIP supplied slides 1–7 and 9–12; slide 8 was missing, and its number was not reassigned. The supplied slides are reproduced as provided; the new Research page separately explains the evidence and its limits. Replace the FAQ placeholder only with the team's supplied answers.
 - **Add a blog post:** copy one of the files in `src/content/blog/`, rename it (the file name becomes the web address), and edit the text. To add a photo, put it in `src/assets/` and add `image:` and `imageAlt:` to the post's top block. Posts only appear once the blog is switched on (see above).
 - **Add a state to the "It's About Time" cards:** add it to `states` in `src/data/states.ts`, then run `node scripts/build-state-outlines.mjs` with every state code the site needs (the steps are at the top of that script) to draw its outline.
 - **Edit a board member's bio or add a member:** edit `src/data/board.ts`. `bio` holds the About page paragraphs (one entry per paragraph), `headline` is the line under the name, and `why` is the short quote on the home page card.
@@ -91,7 +95,7 @@ Search the project for `TODO` to find every spot that needs a decision:
 - **Alerts sign-up form (`src/scripts/form-todo.ts`)**: looks and validates correctly, but **submissions are not connected**. Pressing the button shows a "coming soon" message and sends nothing. Decide where submissions should go (email, a CRM, a spreadsheet, ...) and replace the placeholder in that one file.
 - **Practitioner survey** uses a Google Form. Its link is `practitionerSurveyUrl` in `src/config/site.ts` (used by the top banner and the footer).
 - **Privacy Policy page**: none exists yet, so the alerts form's text-message notice has no "See our Privacy Policy" link. When a policy is published, restore the link (instructions are in the comment at the top of `src/components/forms/AlertSignupForm.astro`). Text-message sign-ups normally require one.
-- **"Read the research summary" link** on the home page points at the research blog post for now, so it's hidden along with the blog.
+- **Legislator FAQs and short written overview** are awaiting the team's content. The supplied slide presentation is available at `/legislators/` in the meantime.
 - **Blog posts** are placeholders. Replace them with real posts before switching the blog on.
 
 ## Outside services the site uses

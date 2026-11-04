@@ -16,6 +16,7 @@ const visible = (links: NavLink[]) =>
  */
 export const mainNav: NavLink[] = visible([
   { label: 'About', href: '/about' },
+  { label: 'Research', href: '/research/' },
   { label: 'The Legislation', href: '/#the-bill' },
   { label: 'Join the Coalition', href: '/join' },
   { label: 'Blog', href: '/blog' },
@@ -30,6 +31,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
     heading: 'Organization',
     links: visible([
       { label: 'About', href: '/about' },
+      { label: 'Research', href: '/research/' },
       { label: 'Statement of Purpose', href: '/about#statement-of-purpose' },
       { label: 'Blog', href: '/blog' },
     ]),

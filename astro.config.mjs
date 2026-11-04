@@ -8,6 +8,9 @@ export default defineConfig({
   // and the sitemap. The site is served from the top of this domain by GitHub Pages.
   site: 'https://naturalstatemh.org',
 
-  // Writes sitemap-index.xml listing every page (public/robots.txt points to it).
-  integrations: [sitemap({ filter: (page) => !page.endsWith('/404/') })],
+  // Allow the workspace preview hostname during development (the site builds to static files).
+  server: { allowedHosts: ['terminal.local'] },
+
+  // List public pages; keep the direct-link legislator briefing out of discovery.
+  integrations: [sitemap({ filter: (page) => !/\/(404|legislators)\/?$/.test(new URL(page).pathname) })],
 });
