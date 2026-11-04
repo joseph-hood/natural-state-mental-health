@@ -15,10 +15,15 @@ const { state } = Astro.props;
   <h3 class="name">{state.name}</h3>
   <p class="big">{state.big}</p>
   <p class="note">{state.note}</p>
+  <a class="bill" href={state.billUrl}>{state.bill}</a>
+  <ul class="votes" role="list" aria-label={`${state.name} official vote records`}>
+    {state.votes.map((vote) => <li><a href={vote.href}>{vote.label}<span class="sr-only"> — official vote record</span></a></li>)}
+  </ul>
 </article>
 
 <style>
   .state-card {
+    container-type: inline-size;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -39,10 +44,13 @@ const { state } = Astro.props;
   .big {
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: 30px;
+    font-size: clamp(22px, 18cqi, 30px);
     line-height: 1.1;
     color: var(--green-deep);
   }
+  .bill { font-size: 14px; font-weight: 600; margin-top: auto; }
+  .votes { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+  .votes a { display: inline-block; padding-block: 4px; text-underline-offset: 3px; }
   .note {
     font-size: 15px;
     line-height: 1.45;
