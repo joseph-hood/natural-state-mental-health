@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Section from '../components/ui/Section.astro';
+import { researchTopics } from '../data/research';
+---
+
+<BaseLayout title="Research" description="Explore primary studies on psilocybin and other psychedelic-assisted therapies, with clear explanations of the findings and their limits.">
+  <PageHeader eyebrow="The evidence" title="Follow the research.">
+    <p>A starting point for understanding the science: what has been studied, what researchers found, and what remains unanswered.</p>
+  </PageHeader>
+
+  <Section tone="tint" labelledby="reading-heading">
+    <div class="intro">
+      <div>
+        <h2 id="reading-heading">Read the findings in context.</h2>
+        <p>These selected studies are educational resources, not medical advice or a complete review of the literature. Psilocybin, MDMA, and ibogaine are different substances; evidence for one does not establish the effects of another. The studies below used screening and supervised research protocols.</p>
+        <p class="reviewed">Sources reviewed November 3, 2026. A trial listing is not a treatment result, and research findings do not establish legal access.</p>
+      </div>
+      <nav aria-label="Research topics">
+        <ul role="list">{researchTopics.map((topic) => <li><a href={`#${topic.id}`}>{topic.name}</a></li>)}</ul>
+      </nav>
+    </div>
+  </Section>
+
+  <div class="container topics">
+    {researchTopics.map((topic, index) => (
+      <section id={topic.id} aria-labelledby={`${topic.id}-heading`} class="topic">
+        <header class="topic-heading">
+          <p class="eyebrow">{String(index + 1).padStart(2, '0')} · {topic.evidence}</p>
+          <h2 id={`${topic.id}-heading`}>{topic.name}</h2>
+          <p>{topic.introduction}</p>
+        </header>
+        <div class="studies">
+          {topic.studies.map((study) => (
+            <article class="study">
+              <p class="substance">{study.substance}</p>
+              <h3><a href={study.href}>{study.title}</a></h3>
+              <p class="citation">{study.citation}</p>
+              <p class="design">{study.design}</p>
+              <p>{study.summary}</p>
+              <p class="limits"><strong>What this does not establish:</strong> {study.limitation}</p>
+              <a class="source" href={study.href}>Read the source<span class="sr-only">: {study.title}</span> →</a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <Section tone="tint" labelledby="libraries-heading">
+    <div class="libraries">
+      <h2 id="libraries-heading">Keep exploring.</h2>
+      <p>Find more published work in these research libraries. Their inclusion here is a resource link, not an endorsement of this organization or its proposed legislation.</p>
+      <ul>
+        <li><a href="https://www.hopkinspsychedelic.org/publications">Johns Hopkins: published studies</a></li>
+        <li><a href="https://bibliography.maps.org/">MAPS: psychedelic research bibliography</a></li>
+      </ul>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  h2, h3 { font-family: var(--font-serif); color: var(--green-deep); font-weight: 600; line-height: 1.2; }
+  h2 { font-size: clamp(30px, 3vw, 42px); }
+  h3 { font-size: 25px; }
+  a { text-underline-offset: 4px; }
+  .intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; }
+  .intro p, .libraries p { margin-top: 16px; max-width: 46em; }
+  .reviewed, .citation { color: var(--text-subtle); font-size: 15px; }
+  nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  nav a { display: block; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--cream); font-weight: 600; }
+  .topics { padding-block: 20px 64px; }
+  .topic { padding-block: 48px; border-bottom: 1px solid var(--line-strong); }
+  .topic:last-child { border-bottom: 0; }
+  .topic-heading { max-width: 800px; margin-bottom: 28px; }
+  .topic-heading h2 { margin-block: 12px 16px; }
+  .studies { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px; }
+  .study { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: clamp(22px, 3vw, 32px); background: var(--white); border: 1px solid var(--line); border-radius: 10px; }
+  .substance { color: var(--green); background: var(--tint); padding: 4px 10px; border-radius: 4px; font-size: 14px; font-weight: 700; }
+  .design { font-weight: 600; font-size: 16px; }
+  .limits { border-left: 3px solid var(--gold); padding-left: 16px; color: var(--text); }
+  .source { margin-top: auto; padding-top: 8px; font-weight: 600; }
+  .libraries ul { padding-left: 22px; list-style: disc; margin-top: 20px; }
+  .libraries li + li { margin-top: 10px; }
+  @media (max-width: 720px) { .intro { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 400px) { nav ul { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,68 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Section from '../components/ui/Section.astro';
+import { legislatorSlides } from '../data/legislator-slides';
+import { SITE } from '../config/site';
+---
+
+<!-- Direct-link briefing: deliberately absent from navigation and the sitemap. -->
+<BaseLayout title="Bill Overview and FAQs" description="Legislative briefing on the proposed Arkansas psilocybin-assisted therapy program." noindex announcement={false}>
+  <PageHeader eyebrow="For Arkansas legislators" title="Bill Overview and FAQs">
+    <p>An introduction to Natural State Mental Health’s proposed state-regulated psilocybin-assisted therapy program for the 2027 legislative session.</p>
+  </PageHeader>
+
+  <Section tone="tint" labelledby="briefing-heading">
+    <div class="overview">
+      <div>
+        <h2 id="briefing-heading">The statewide briefing</h2>
+        <p>Explore the October 2026 presentation below. These slides describe a proposal, not enacted law; details may change as the legislation develops.</p>
+        <p>Eleven supplied slides are included in their original order. Slide 8 was not included in this edition. Select a slide to open its full-resolution image, or expand its text version.</p>
+      </div>
+      <nav aria-label="Briefing sections"><a href="#presentation">View the presentation ↓</a><a href="#faqs">FAQ update ↓</a></nav>
+    </div>
+  </Section>
+
+  <section id="presentation" class="container presentation" aria-label="October 2026 legislative presentation">
+    {legislatorSlides.map((slide, index) => (
+      <article class="slide" aria-labelledby={`slide-${slide.number}-heading`}>
+        <header><p class="eyebrow">Slide {slide.number}</p><h2 id={`slide-${slide.number}-heading`}>{slide.title}</h2></header>
+        <a class="slide-image" href={slide.image.src} target="_blank" rel="noopener" aria-label={`Open slide ${slide.number} at full resolution (new tab)`}>
+          <Picture src={slide.image} formats={['webp']} widths={[640, 1280, 1920]} width={1920} sizes="(min-width: 1200px) 1120px, calc(100vw - 40px)" alt={`Slide ${slide.number}: ${slide.title}. Text version follows.`} loading={index === 0 ? 'eager' : 'lazy'} />
+        </a>
+        <details><summary>Read slide {slide.number} text</summary><div class="transcript">{slide.text.map((paragraph) => <p>{paragraph}</p>)}</div></details>
+      </article>
+    ))}
+  </section>
+
+  <Section id="faqs" tone="tint" labelledby="faq-heading">
+    <div class="faq">
+      <p class="eyebrow">Questions and answers</p>
+      <h2 id="faq-heading">FAQs are being prepared.</h2>
+      <p>The team is preparing a written bill overview and answers to common legislative questions. This section will be updated when those materials are ready.</p>
+      <a href={`mailto:${SITE.email}`}>Contact Natural State Mental Health with a question →</a>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  h2 { font-family: var(--font-serif); color: var(--green-deep); font-weight: 600; font-size: clamp(27px, 3vw, 38px); line-height: 1.2; }
+  .overview { display: grid; grid-template-columns: minmax(0, 3fr) minmax(200px, 1fr); gap: 40px; }
+  .overview p { max-width: 48em; margin-top: 16px; }
+  nav { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; justify-content: center; }
+  a { text-underline-offset: 4px; }
+  nav a, .faq a { font-weight: 600; }
+  .presentation { max-width: 1200px; padding-block: 56px; display: flex; flex-direction: column; gap: 56px; }
+  .slide { min-width: 0; }
+  .slide header { margin-bottom: 20px; }
+  .slide h2 { margin-top: 8px; }
+  .slide-image { display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--line-strong); }
+  .slide-image :global(img) { width: 100%; height: auto; }
+  details { border: 1px solid var(--line-strong); margin-top: 12px; border-radius: 6px; background: var(--white); }
+  summary { cursor: pointer; padding: 14px 18px; color: var(--green); font-weight: 600; }
+  .transcript { padding: 0 22px 22px; max-width: 850px; }
+  .transcript p + p { margin-top: 14px; }
+  .faq { max-width: 760px; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+  @media (max-width: 680px) { .overview { grid-template-columns: 1fr; gap: 24px; } }
+</style>
