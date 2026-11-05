@@ -98,10 +98,10 @@ export const board: BoardMember[] = [
     slug: 'kemmi-sadler',
     name: 'Kemmi Sadler',
     role: 'Law Enforcement & Veteran Partnerships',
-    why: '26 years as a federal agent. Now I advocate for first responders.',
+    why: '25 years in sworn law enforcement. Now I advocate for first responders.',
     headline: 'Retired U.S. Diplomat and Supervisory Special Agent',
     bio: [
-      'Kemmi is a retired U.S. diplomat and Supervisory Special Agent with the U.S. Department of State’s Diplomatic Security Service, capping a 26-year career in law enforcement and international security. After retirement, her own healing journey led her to explore ayahuasca, psychedelics, spirituality, and the impact of trauma and moral injury on those who serve.',
+      'Kemmi is a retired U.S. diplomat and Supervisory Special Agent with the U.S. Department of State’s Diplomatic Security Service, bringing 25 years of sworn law enforcement experience, including 20 years as a federal agent. After retirement, her own healing journey led her to explore ayahuasca, psychedelics, spirituality, and the impact of trauma and moral injury on those who serve.',
       'She is the best-selling author of <em>From the Badge to the Vine: A Journey Through Duty, Trauma, and Healing</em>, a memoir about her transition from a career built on control and resilience toward recognizing her own need to heal. Kemmi writes and speaks on first responder mental health, moral injury, and psychedelic healing.',
       'To raise awareness of first responder suicide, she walked the 780-kilometer Camino de Santiago along with her dog Nona, carrying the names of 56 first responders who had died by suicide. She owns land in the Ozarks outside Harrison, Arkansas, where she is developing a place of respite for veterans, first responders, and others carrying the weight of service.',
     ],
