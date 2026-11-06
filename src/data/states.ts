@@ -83,7 +83,7 @@ export const stats: Stat[] = [
     text: 'of U.S. voters back legal therapeutic access to psychedelics.',
     image: signingCeremony,
     imageAlt:
-      'A signing ceremony in the White House: a seated man holds up a signed document while people standing behind the desk applaud.',
+      'The Arkansas State Capitol building in Little Rock, Arkansas.',
   },
   {
     figure: '55%',
